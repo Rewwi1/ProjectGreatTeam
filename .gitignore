@@ -13,17 +13,17 @@ Desktop.ini
 .vscode/tasks.json
 .vscode/launch.json
 .vscode/extensions.json
-# Но можно оставить .vscode/code-workspace, если используете workspace
+
 
 # Другие IDE
 .idea/
 *.swp
 *.swo
-*~
+
 
 # --- Секреты и окружение (КРИТИЧНО) ---
 
-# Если вдруг начнешь использовать переменные окружения
+# переменные окружения
 .env
 .env.local
 .env.production
@@ -35,12 +35,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Папка зависимостей (на будущее, если подключишь npm)
+# Папка зависимостей  
 node_modules/
 
-# --- Сборщики и инструменты (на будущее) ---
+# Сборщики и инструменты
 
-# Если будешь использовать Vite, Webpack, Parcel, Gulp и т.д.
+# Vite, Webpack, Parcel, Gulp и т.д.
 dist/
 build/
 coverage/
