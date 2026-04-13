@@ -1,267 +1,391 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Защита ВКонтакте — Пошаговая инструкция</title>
-    <link rel="stylesheet" href="stylesVK.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Защита ВКонтакте — Пошаговая инструкция</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --card-bg: #1e293b;
+      --card-bg-light: #253349;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #10b981;
+      --accent-hover: #059669;
+      --vk-color: #0077FF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    a { text-decoration: none; color: inherit; transition: 0.3s; }
+    ul { list-style: none; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* === ШАПКА === */
+    header {
+      padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky; top: 0; background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(5px); z-index: 100;
+    }
+    .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 10px; }
+    .logo span { color: white; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 8px; background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem; }
+    .back-btn:hover { background: rgba(255,255,255,0.1); color: var(--text-main); }
+
+    /* === ЗАГОЛОВОК === */
+    .page-header { padding: 50px 0 20px; text-align: center; }
+    .vk-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 119, 255, 0.15); color: var(--vk-color); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; }
+    .page-header h1 { font-size: 2.2rem; margin-bottom: 12px; line-height: 1.2; }
+    .page-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+
+    /* 🔘 ПЕРЕКЛЮЧАТЕЛЬ ВИДА */
+    .view-switcher { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
+    .switch-label { display: flex; align-items: center; gap: 8px; padding: 10px 20px; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; cursor: pointer; font-size: 0.9rem; color: var(--text-muted); transition: all 0.3s ease; user-select: none; }
+    .switch-label:hover { background: var(--card-bg-light); }
+    .switch-label input { display: none; }
+    .switch-label span { position: relative; padding-left: 4px; }
+    .switch-label input:checked + span::before { content: ''; position: absolute; left: -4px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+    .switch-label input:checked + span { color: var(--text-main); font-weight: 600; }
+    .switch-label:has(input:checked) { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.3); }
+
+    /* === НАВИГАЦИЯ === */
+    .steps-nav { display: flex; gap: 10px; padding: 10px 0 30px; overflow-x: auto; scrollbar-width: none; justify-content: center; flex-wrap: wrap; }
+    .steps-nav::-webkit-scrollbar { display: none; }
+    .steps-nav a { display: flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 10px; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: var(--text-muted); white-space: nowrap; transition: all 0.3s ease; }
+    .steps-nav a:hover { background: var(--card-bg-light); color: white; transform: translateY(-2px); }
+    .steps-nav a.active { background: rgba(16, 185, 129, 0.15); color: var(--accent); border-color: rgba(16, 185, 129, 0.3); font-weight: 600; }
+    .step-num-circle { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
+    .steps-nav a.active .step-num-circle { background: var(--accent); color: white; }
+
+    /* === ШАГИ === */
+    .step-section { margin-bottom: 50px; scroll-margin-top: 100px; }
+    .step-card { background: var(--card-bg); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    .step-header { padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 20px; }
+    .step-header-num { flex-shrink: 0; width: 50px; height: 50px; border-radius: 14px; background: linear-gradient(135deg, var(--accent), #059669); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 800; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); color: white; }
+    .step-header-text h2 { font-size: 1.5rem; margin-bottom: 4px; }
+    .step-header-text .tagline { color: var(--accent); font-size: 0.85rem; font-weight: 600; opacity: 0.9; display: block; margin-bottom: 5px; }
+    
+    .step-instruction { padding: 30px; }
+    .step-instruction p { color: var(--text-muted); margin-bottom: 15px; line-height: 1.7; }
+    .path-box { background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: 8px; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9rem; color: var(--text-main); border-left: 3px solid var(--vk-color); margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .path-box .arrow { color: var(--accent); }
+    .tip-box { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 16px; margin-top: 20px; }
+    .tip-box h4 { color: var(--accent); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+
+    /* 🖼️ УМНАЯ СЕТКА КАРТИНОК */
+    .screenshots-list {
+      display: grid;
+      /* ТЕЛЕФОН: 5 картинок в ряду на большом экране, 2 на телефоне. Чуть увеличил с 240 до 260 */
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      background: #162032;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      justify-content: center; /* Центрирует группу картинок */
+      align-items: center;
+    }
+
+    /* Режим ПК: Делаем ячейки шире, чтобы скриншоты были крупнее */
+    body.view-pc .screenshots-list {
+      /* ПК: Один столбец для максимального размера скриншотов */
+      grid-template-columns: 1fr;
+    }
+
+    .img-view {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      background: #111827;
+      transition: transform 0.2s;
+    }
+    .img-view:hover { transform: translateY(-3px); }
+
+    /* Логика скрытия/показа */
+    body.view-phone .img-phone { display: block; }
+    body.view-phone .img-pc { display: none; }
+    body.view-pc .img-phone { display: none; }
+    body.view-pc .img-pc { display: block; }
+
+    /* === КНОПКА И ФУТЕР === */
+    .next-area { text-align: center; padding: 40px 0 80px; }
+    .btn-next { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 40px; background: var(--accent); color: white; font-size: 1.1rem; font-weight: 700; border-radius: 12px; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+    .btn-next:hover { background: var(--accent-hover); transform: translateY(-3px); }
+    footer { text-align: center; padding: 30px 0; border-top: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 0.9rem; background: rgba(15, 23, 42, 0.5); }
+
+    /* === АДАПТИВНОСТЬ === */
+    @media (max-width: 900px) {
+      .steps-nav { justify-content: flex-start; padding: 10px 20px 30px; margin: 0; overflow-x: auto; flex-wrap: nowrap; }
+      .steps-nav a { flex: 0 0 auto; }
+    }
+    @media (max-width: 768px) {
+      .page-header h1 { font-size: 1.8rem; }
+      .step-header { padding: 20px; flex-direction: column; align-items: flex-start; gap: 15px; }
+      .step-instruction { padding: 20px; }
+      .screenshots-list { padding: 15px; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+      body.view-pc .screenshots-list { grid-template-columns: 1fr; }
+      .step-header-num { width: 44px; height: 44px; font-size: 1.1rem; }
+      .step-header-text h2 { font-size: 1.35rem; }
+    }
+    @media (max-width: 480px) {
+      .page-header h1 { font-size: 1.5rem; }
+      .container { padding: 0 16px; }
+      .nav-wrapper { padding: 0 16px; }
+      .step-header-num { width: 40px; height: 40px; font-size: 1rem; }
+      .path-box { font-size: 0.8rem; padding: 10px; }
+      .btn-next { width: 100%; font-size: 1rem; }
+    }
+  </style>
 </head>
-<body>
+<body class="view-phone">
 
-    <header>
-        <div class="container nav-wrapper">
-            <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
-            <a href="index.html" class="back-btn">← На главную</a>
-        </div>
-    </header>
+  <header>
+    <div class="container nav-wrapper">
+      <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
+      <a href="index.html" class="back-btn">← На главную</a>
+    </div>
+  </header>
 
+  <main class="container">
     <div class="page-header">
-        <div class="container">
-            <div class="vk-badge">
-                <svg width="16" height="16" viewBox="0 0 48 48" fill="none"><path d="M0 23.04C0 12.1788 0 6.74826 3.37413 3.37413C6.74826 0 12.1788 0 23.04 0H24.96C35.8212 0 41.2517 0 44.6259 3.37413C48 6.74826 48 12.1788 48 23.04V24.96C48 35.8212 48 41.2517 44.6259 44.6259C41.2517 48 35.8212 48 24.96 48H23.04C12.1788 48 6.74826 48 3.37413 44.6259C0 41.2517 0 35.8212 0 24.96V23.04Z" fill="#0077FF"/><path d="M25.54 34.5801C14.6 34.5801 8.3601 27.0801 8.1001 14.6001H13.5801C13.7601 23.7601 17.8 27.6401 21 28.4401V14.6001H26.1602V22.5001C29.3202 22.1601 32.6398 18.5601 33.7598 14.6001H38.9199C38.0599 19.4801 34.4599 23.0801 31.8999 24.5601C34.4599 25.7601 38.5601 28.9001 40.1201 34.5801H34.4399C33.2199 30.7801 30.1802 27.8401 26.1602 27.4401V34.5801H25.54Z" fill="white"/></svg>
-                ВКонтакте
-            </div>
-            <h1>Защитите аккаунт за 7 шагов</h1>
-            <p>Следуйте инструкции. На каждом шаге — текст и скриншоты. Листайте картинки, чтобы видеть, куда нажимать.</p>
-        </div>
+      <div class="vk-badge">🔵 ВКонтакте</div>
+      <h1>Защитите аккаунт за 7 шагов</h1>
+      <p>Следуйте инструкции. На каждом шаге — текст и скриншоты. Листайте вниз, чтобы увидеть все картинки.</p>
     </div>
 
-    <div class="container" id="stepsContainer">
-        <section class="step-section" id="step-1">
-            <div class="step-card">
-                <div class="step-header">
-                    <div class="step-header-num">1</div>
-                    <div class="step-header-text">
-                        <div class="tagline">Шаг 1 из 7</div>
-                        <h2>Установите надёжный пароль</h2>
-                    </div>
-                </div>
-                <div class="step-instruction">
-                    <p>Вам нужно создать сложный пароль, который невозможно подобрать. Не используйте дату рождения или имя.</p>
-                    <div class="path-box">Настройки <span class="arrow">→</span> Безопасность и вход <span class="arrow">→</span> Пароль <span class="arrow">→</span> Изменить пароль</div>
-                </div>
-                <div class="carousel-container">
-                    <div class="carousel">
-                        <button class="carousel-btn prev" disabled>&#8249;</button>
-                        <div class="carousel-track-wrapper">
-                            <div class="carousel-track">
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">📱</div><div class="placeholder-text">Откройте меню (три полоски)</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">⚙️</div><div class="placeholder-text">Перейдите в «Настройки»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🛡️</div><div class="placeholder-text">Раздел «Безопасность»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🔑</div><div class="placeholder-text">Нажмите «Изменить пароль»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">✅</div><div class="placeholder-text">Введите новый пароль</div><div class="highlight-box">Минимум 12 символов!</div></div></div>
-                            </div>
-                        </div>
-                        <button class="carousel-btn next">&#8250;</button>
-                    </div>
-                    <div class="carousel-dots"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="step-section" id="step-2">
-            <div class="step-card">
-                <div class="step-header">
-                    <div class="step-header-num">2</div>
-                    <div class="step-header-text">
-                        <div class="tagline">Шаг 2 из 7</div>
-                        <h2>Включите двухфакторную аутентификацию (2FA)</h2>
-                    </div>
-                </div>
-                <div class="step-instruction">
-                    <p>Это добавит вторую защиту. Даже если узнают пароль, без кода из приложения не войдут.</p>
-                    <div class="path-box">Настройки <span class="arrow">→</span> Безопасность и вход <span class="arrow">→</span> Двухфакторная аутентификация</div>
-                </div>
-                <div class="carousel-container">
-                    <div class="carousel">
-                        <button class="carousel-btn prev" disabled>&#8249;</button>
-                        <div class="carousel-track-wrapper">
-                            <div class="carousel-track">
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🛡️</div><div class="placeholder-text">Меню «Безопасность»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🔐</div><div class="placeholder-text">Выберите «Подключить 2FA»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">📲</div><div class="placeholder-text">Выбор метода (приложение)</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">📷</div><div class="placeholder-text">Сканирование QR-кода</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">💾</div><div class="placeholder-text">Сохраните резервные коды</div><div class="highlight-box">Запишите их на бумаге!</div></div></div>
-                            </div>
-                        </div>
-                        <button class="carousel-btn next">&#8250;</button>
-                    </div>
-                    <div class="carousel-dots"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="step-section" id="step-3">
-            <div class="step-card">
-                <div class="step-header">
-                    <div class="step-header-num">3</div>
-                    <div class="step-header-text">
-                        <div class="tagline">Шаг 3 из 7</div>
-                        <h2>Настройте приватность</h2>
-                    </div>
-                </div>
-                <div class="step-instruction">
-                    <p>Скройте личную информацию от незнакомцев. Только друзья должны видеть ваши фото и переписку.</p>
-                    <div class="path-box">Настройки <span class="arrow">→</span> Приватность <span class="arrow">→</span> «Кто видит мою страницу»</div>
-                    <div class="tip-box"><h4>🔍 Проверка</h4><p>Внизу раздела есть ссылка «Посмотреть, как видят Вашу страницу другие». Нажмите её, чтобы убедиться.</p></div>
-                </div>
-                <div class="carousel-container">
-                    <div class="carousel">
-                        <button class="carousel-btn prev" disabled>&#8249;</button>
-                        <div class="carousel-track-wrapper">
-                            <div class="carousel-track">
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">👁️</div><div class="placeholder-text">Раздел «Приватность»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">👤</div><div class="placeholder-text">Настройка «Кто видит страницу»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">👥</div><div class="placeholder-text">Выбор «Только друзья»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">📷</div><div class="placeholder-text">Скрытие фотографий</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">✅</div><div class="placeholder-text">Проверка видимости</div><div class="highlight-box">Ничего лишнего?</div></div></div>
-                            </div>
-                        </div>
-                        <button class="carousel-btn next">&#8250;</button>
-                    </div>
-                    <div class="carousel-dots"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="step-section" id="step-4">
-            <div class="step-card">
-                <div class="step-header">
-                    <div class="step-header-num">4</div>
-                    <div class="step-header-text">
-                        <div class="tagline">Шаг 4 из 7</div>
-                        <h2>Проверьте активные сессии</h2>
-                    </div>
-                </div>
-                <div class="step-instruction">
-                    <p>Посмотрите, не зашел ли кто-то в ваш аккаунт с другого устройства или из другого города.</p>
-                    <div class="path-box">Настройки <span class="arrow">→</span> Безопасность <span class="arrow">→</span> История входов <span class="arrow">→</span> Завершить все другие сессии</div>
-                    <div class="tip-box"><h4>🛡️ Рекомендация</h4><p>Нажимайте «Завершить все другие сессии» раз в месяц. Это сбрасывает все входы, кроме текущего.</p></div>
-                </div>
-                <div class="carousel-container">
-                    <div class="carousel">
-                        <button class="carousel-btn prev" disabled>&#8249;</button>
-                        <div class="carousel-track-wrapper">
-                            <div class="carousel-track">
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🛡️</div><div class="placeholder-text">Раздел «Безопасность»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">📋</div><div class="placeholder-text">Список «История входов»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🔍</div><div class="placeholder-text">Поиск незнакомых устройств</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🚫</div><div class="placeholder-text">Кнопка «Завершить сессии»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">✅</div><div class="placeholder-text">Успешный выход</div><div class="highlight-box">Остался только ваш телефон</div></div></div>
-                            </div>
-                        </div>
-                        <button class="carousel-btn next">&#8250;</button>
-                    </div>
-                    <div class="carousel-dots"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="step-section" id="step-5">
-            <div class="step-card">
-                <div class="step-header">
-                    <div class="step-header-num">5</div>
-                    <div class="step-header-text">
-                        <div class="tagline">Шаг 5 из 7</div>
-                        <h2>Удалите лишние приложения</h2>
-                    </div>
-                </div>
-                <div class="step-instruction">
-                    <p>Многие игры и тесты имеют доступ к вашей странице. Удалите доступ у всего, чем не пользуетесь.</p>
-                    <div class="path-box">Настройки <span class="arrow">→</span> Безопасность <span class="arrow">→</span> Приложения и сайты</div>
-                </div>
-                <div class="carousel-container">
-                    <div class="carousel">
-                        <button class="carousel-btn prev" disabled>&#8249;</button>
-                        <div class="carousel-track-wrapper">
-                            <div class="carousel-track">
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🎮</div><div class="placeholder-text">Раздел «Приложения»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">📱</div><div class="placeholder-text">Список подключенных</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🗑️</div><div class="placeholder-text">Кнопка «Отключить»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">❓</div><div class="placeholder-text">Подтверждение удаления</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🧹</div><div class="placeholder-text">Чистый список</div><div class="highlight-box">Оставьте только нужное</div></div></div>
-                            </div>
-                        </div>
-                        <button class="carousel-btn next">&#8250;</button>
-                    </div>
-                    <div class="carousel-dots"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="step-section" id="step-6">
-            <div class="step-card">
-                <div class="step-header">
-                    <div class="step-header-num">6</div>
-                    <div class="step-header-text">
-                        <div class="tagline">Шаг 6 из 7</div>
-                        <h2>Проверьте контактные данные</h2>
-                    </div>
-                </div>
-                <div class="step-instruction">
-                    <p>Убедитесь, что в настройках указан ваш актуальный номер телефона и почта. Если там старый номер — взломщик может восстановить доступ через него.</p>
-                    <div class="path-box">Настройки <span class="arrow">→</span> Общие <span class="arrow">→</span> Номер телефона</div>
-                </div>
-                <div class="carousel-container">
-                    <div class="carousel">
-                        <button class="carousel-btn prev" disabled>&#8249;</button>
-                        <div class="carousel-track-wrapper">
-                            <div class="carousel-track">
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">⚙️</div><div class="placeholder-text">Раздел «Общие»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">📱</div><div class="placeholder-text">Просмотр телефона</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">✏️</div><div class="placeholder-text">Кнопка «Изменить»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🔢</div><div class="placeholder-text">Ввод нового номера</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">📩</div><div class="placeholder-text">Подтверждение кодом</div><div class="highlight-box">Проверьте доступ к SMS</div></div></div>
-                            </div>
-                        </div>
-                        <button class="carousel-btn next">&#8250;</button>
-                    </div>
-                    <div class="carousel-dots"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="step-section" id="step-7">
-            <div class="step-card">
-                <div class="step-header">
-                    <div class="step-header-num">7</div>
-                    <div class="step-header-text">
-                        <div class="tagline">Шаг 7 из 7</div>
-                        <h2>Защита от фишинга</h2>
-                    </div>
-                </div>
-                <div class="step-instruction">
-                    <p>Не переходите по подозрительным ссылкам из ЛС. ВКонтакте никогда не просит пароль в сообщениях.</p>
-                <div class="carousel-container">
-                    <div class="carousel">
-                        <button class="carousel-btn prev" disabled>&#8249;</button>
-                        <div class="carousel-track-wrapper">
-                            <div class="carousel-track">
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">💬</div><div class="placeholder-text">Пример спам-сообщения</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🔗</div><div class="placeholder-text">Проверка ссылки</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🚩</div><div class="placeholder-text">Признаки поддельного сайта</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🛑</div><div class="placeholder-text">Кнопка «Пожаловаться»</div></div></div>
-                                <div class="slide"><div class="screenshot-mock"><div class="placeholder-icon">🛡️</div><div class="placeholder-text">Настройки приватности ЛС</div><div class="highlight-box">Кто может писать мне?</div></div></div>
-                            </div>
-                        </div>
-                        <button class="carousel-btn next">&#8250;</button>
-                    </div>
-                    <div class="carousel-dots"></div>
-                </div>
-            </div>
-        </section>
-
-        <div class="next-area">
-            <button class="btn-next" id="nextBtn">Далее →</button>
-        </div>
+    <!-- 🔘 ПЕРЕКЛЮЧАТЕЛЬ ВИДА -->
+    <div class="view-switcher">
+      <label class="switch-label">
+        <input type="radio" name="view-mode" value="phone" checked>
+        <span>📱 Телефон</span>
+      </label>
+      <label class="switch-label">
+        <input type="radio" name="view-mode" value="pc">
+        <span>💻 ПК</span>
+      </label>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
+    <!-- Шаг 1 -->
+    <section id="step-1" class="step-section">
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-header-num">1</div>
+          <div class="step-header-text">
+            <span class="tagline">Шаг 1 из 7</span>
+            <h2>Установите надёжный пароль</h2>
+          </div>
         </div>
-    </footer>
+        <div class="step-instruction">
+          <p>Вам нужно создать сложный пароль, который невозможно подобрать. Не используйте дату рождения или имя.</p>
+          <div class="path-box">Настройки <span class="arrow">→</span> Безопасность и вход <span class="arrow">→</span> Пароль <span class="arrow">→</span> Изменить пароль</div>
+        </div>
+        <div class="screenshots-list">
+          <img src="step1-phone-1.jpg" class="img-view img-phone" alt="">
+          <img src="step1-phone-2.jpg" class="img-view img-phone" alt="">
+          <img src="step1-phone-3.jpg" class="img-view img-phone" alt="">
+          <img src="step1-phone-4.jpg" class="img-view img-phone" alt="">
+          <img src="step1-phone-5.jpg" class="img-view img-phone" alt="">
+          <img src="step1-pc-1.jpg" class="img-view img-pc" alt="">
+          <img src="step1-pc-2.jpg" class="img-view img-pc" alt="">
+          <img src="step1-pc-3.jpg" class="img-view img-pc" alt="">
+          <img src="step1-pc-4.jpg" class="img-view img-pc" alt="">
+          <img src="step1-pc-5.jpg" class="img-view img-pc" alt="">
+        </div>
+      </div>
+    </section>
 
-    <script src="scriptVK.js"></script>
+    <!-- Шаг 2 -->
+    <section id="step-2" class="step-section">
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-header-num">2</div>
+          <div class="step-header-text">
+            <span class="tagline">Шаг 2 из 7</span>
+            <h2>Включите двухфакторную аутентификацию (2FA)</h2>
+          </div>
+        </div>
+        <div class="step-instruction">
+          <p>Это добавит вторую защиту. Даже если узнают пароль, без кода из приложения не войдут.</p>
+          <div class="path-box">Настройки <span class="arrow">→</span> Безопасность и вход <span class="arrow">→</span> Двухфакторная аутентификация</div>
+        </div>
+        <div class="screenshots-list">
+          <img src="step2-phone-1.jpg" class="img-view img-phone" alt=""><img src="step2-phone-2.jpg" class="img-view img-phone" alt="">
+          <img src="step2-phone-3.jpg" class="img-view img-phone" alt=""><img src="step2-phone-4.jpg" class="img-view img-phone" alt="">
+          <img src="step2-phone-5.jpg" class="img-view img-phone" alt="">
+          <img src="step2-pc-1.jpg" class="img-view img-pc" alt=""><img src="step2-pc-2.jpg" class="img-view img-pc" alt="">
+          <img src="step2-pc-3.jpg" class="img-view img-pc" alt=""><img src="step2-pc-4.jpg" class="img-view img-pc" alt="">
+          <img src="step2-pc-5.jpg" class="img-view img-pc" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- Шаг 3 -->
+    <section id="step-3" class="step-section">
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-header-num">3</div>
+          <div class="step-header-text">
+            <span class="tagline">Шаг 3 из 7</span>
+            <h2>Настройте приватность</h2>
+          </div>
+        </div>
+        <div class="step-instruction">
+          <p>Скройте личную информацию от незнакомцев. Только друзья должны видеть ваши фото и переписку.</p>
+          <div class="path-box">Настройки → Приватность → «Кто видит мою страницу»</div>
+          <div class="tip-box"><h4>🔍 Проверка</h4><p>Внизу раздела есть ссылка «Посмотреть, как видят Вашу страницу другие». Нажмите её, чтобы убедиться.</p></div>
+        </div>
+        <div class="screenshots-list">
+          <img src="step3-phone-1.jpg" class="img-view img-phone" alt=""><img src="step3-phone-2.jpg" class="img-view img-phone" alt="">
+          <img src="step3-phone-3.jpg" class="img-view img-phone" alt=""><img src="step3-phone-4.jpg" class="img-view img-phone" alt="">
+          <img src="step3-phone-5.jpg" class="img-view img-phone" alt="">
+          <img src="step3-pc-1.jpg" class="img-view img-pc" alt=""><img src="step3-pc-2.jpg" class="img-view img-pc" alt="">
+          <img src="step3-pc-3.jpg" class="img-view img-pc" alt=""><img src="step3-pc-4.jpg" class="img-view img-pc" alt="">
+          <img src="step3-pc-5.jpg" class="img-view img-pc" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- Шаг 4 -->
+    <section id="step-4" class="step-section">
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-header-num">4</div>
+          <div class="step-header-text">
+            <span class="tagline">Шаг 4 из 7</span>
+            <h2>Проверьте активные сессии</h2>
+          </div>
+        </div>
+        <div class="step-instruction">
+          <p>Посмотрите, не зашел ли кто-то в ваш аккаунт с другого устройства или из другого города.</p>
+          <div class="path-box">Настройки → Безопасность → История входов → Завершить все другие сессии</div>
+          <div class="tip-box"><h4>🛡️ Рекомендация</h4><p>Нажимайте «Завершить все другие сессии» раз в месяц. Это сбрасывает все входы, кроме текущего.</p></div>
+        </div>
+        <div class="screenshots-list">
+          <img src="step4-phone-1.jpg" class="img-view img-phone" alt=""><img src="step4-phone-2.jpg" class="img-view img-phone" alt="">
+          <img src="step4-phone-3.jpg" class="img-view img-phone" alt=""><img src="step4-phone-4.jpg" class="img-view img-phone" alt="">
+          <img src="step4-phone-5.jpg" class="img-view img-phone" alt="">
+          <img src="step4-pc-1.jpg" class="img-view img-pc" alt=""><img src="step4-pc-2.jpg" class="img-view img-pc" alt="">
+          <img src="step4-pc-3.jpg" class="img-view img-pc" alt=""><img src="step4-pc-4.jpg" class="img-view img-pc" alt="">
+          <img src="step4-pc-5.jpg" class="img-view img-pc" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- Шаг 5 -->
+    <section id="step-5" class="step-section">
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-header-num">5</div>
+          <div class="step-header-text">
+            <span class="tagline">Шаг 5 из 7</span>
+            <h2>Удалите лишние приложения</h2>
+          </div>
+        </div>
+        <div class="step-instruction">
+          <p>Многие игры и тесты имеют доступ к вашей странице. Удалите доступ у всего, чем не пользуетесь.</p>
+          <div class="path-box">Настройки <span class="arrow">→</span> Безопасность <span class="arrow">→</span> Приложения и сайты</div>
+        </div>
+        <div class="screenshots-list">
+          <img src="step5-phone-1.jpg" class="img-view img-phone" alt=""><img src="step5-phone-2.jpg" class="img-view img-phone" alt="">
+          <img src="step5-phone-3.jpg" class="img-view img-phone" alt=""><img src="step5-phone-4.jpg" class="img-view img-phone" alt="">
+          <img src="step5-phone-5.jpg" class="img-view img-phone" alt="">
+          <img src="step5-pc-1.jpg" class="img-view img-pc" alt=""><img src="step5-pc-2.jpg" class="img-view img-pc" alt="">
+          <img src="step5-pc-3.jpg" class="img-view img-pc" alt=""><img src="step5-pc-4.jpg" class="img-view img-pc" alt="">
+          <img src="step5-pc-5.jpg" class="img-view img-pc" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- Шаг 6 -->
+    <section id="step-6" class="step-section">
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-header-num">6</div>
+          <div class="step-header-text">
+            <span class="tagline">Шаг 6 из 7</span>
+            <h2>Проверьте контактные данные</h2>
+          </div>
+        </div>
+        <div class="step-instruction">
+          <p>Убедитесь, что в настройках указан ваш актуальный номер телефона и почта. Если там старый номер — взломщик может восстановить доступ через него.</p>
+          <div class="path-box">Настройки <span class="arrow">→</span> Общие <span class="arrow">→</span> Номер телефона</div>
+        </div>
+        <div class="screenshots-list">
+          <img src="step6-phone-1.jpg" class="img-view img-phone" alt=""><img src="step6-phone-2.jpg" class="img-view img-phone" alt="">
+          <img src="step6-phone-3.jpg" class="img-view img-phone" alt=""><img src="step6-phone-4.jpg" class="img-view img-phone" alt="">
+          <img src="step6-phone-5.jpg" class="img-view img-phone" alt="">
+          <img src="step6-pc-1.jpg" class="img-view img-pc" alt=""><img src="step6-pc-2.jpg" class="img-view img-pc" alt="">
+          <img src="step6-pc-3.jpg" class="img-view img-pc" alt=""><img src="step6-pc-4.jpg" class="img-view img-pc" alt="">
+          <img src="step6-pc-5.jpg" class="img-view img-pc" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- Шаг 7 -->
+    <section id="step-7" class="step-section">
+      <div class="step-card">
+        <div class="step-header">
+          <div class="step-header-num">7</div>
+          <div class="step-header-text">
+            <span class="tagline">Шаг 7 из 7</span>
+            <h2>Защита от фишинга</h2>
+          </div>
+        </div>
+        <div class="step-instruction">
+          <p>Не переходите по подозрительным ссылкам из ЛС. ВКонтакте никогда не просит пароль в сообщениях.</p>
+        </div>
+        <div class="screenshots-list">
+          <img src="step7-phone-1.jpg" class="img-view img-phone" alt=""><img src="step7-phone-2.jpg" class="img-view img-phone" alt="">
+          <img src="step7-phone-3.jpg" class="img-view img-phone" alt=""><img src="step7-phone-4.jpg" class="img-view img-phone" alt="">
+          <img src="step7-phone-5.jpg" class="img-view img-phone" alt="">
+          <img src="step7-pc-1.jpg" class="img-view img-pc" alt=""><img src="step7-pc-2.jpg" class="img-view img-pc" alt="">
+          <img src="step7-pc-3.jpg" class="img-view img-pc" alt=""><img src="step7-pc-4.jpg" class="img-view img-pc" alt="">
+          <img src="step7-pc-5.jpg" class="img-view img-pc" alt="">
+        </div>
+      </div>
+    </section>
+
+    <div class="next-area">
+      <a href="#" class="btn-next">Далее →</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const radios = document.querySelectorAll('input[name="view-mode"]');
+      const body = document.body;
+
+      function updateView(mode) {
+        body.className = mode === 'pc' ? 'view-pc' : 'view-phone';
+        localStorage.setItem('vk-view', mode);
+      }
+
+      radios.forEach(radio => {
+        radio.addEventListener('change', e => updateView(e.target.value));
+      });
+
+      // Восстановление при загрузке
+      const saved = localStorage.getItem('vk-view') || 'phone';
+      const activeRadio = document.querySelector(`input[name="view-mode"][value="${saved}"]`);
+      if (activeRadio) { activeRadio.checked = true; updateView(saved); } 
+      else { updateView(saved); }
+    });
+  </script>
 </body>
 </html>
+
