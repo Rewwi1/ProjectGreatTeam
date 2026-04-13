@@ -1,0 +1,117 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --card-bg-light: #253349;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --accent: #10b981;
+    --accent-hover: #059669;
+    --vk-color: #0077FF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+/* ШАПКА */
+header {
+    padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: sticky; top: 0; background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(5px); z-index: 100;
+}
+.nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--accent); display: flex; align-items: center; gap: 10px; }
+.logo span { color: white; }
+.back-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 8px; background: rgba(255,255,255,0.05); color: var(--text-muted); font-size: 0.9rem; }
+.back-btn:hover { background: rgba(255,255,255,0.1); color: var(--text-main); }
+
+/* ЗАГОЛОВОК */
+.page-header { padding: 50px 0 30px; text-align: center; }
+.vk-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 119, 255, 0.15); color: var(--vk-color); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; }
+.page-header h1 { font-size: 2.2rem; margin-bottom: 12px; line-height: 1.2; }
+.page-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+
+/* НАВИГАЦИЯ */
+.steps-nav { display: flex; gap: 10px; padding: 10px 0 30px; overflow-x: auto; scrollbar-width: none; justify-content: center; flex-wrap: wrap; }
+.steps-nav::-webkit-scrollbar { display: none; }
+.steps-nav a { display: flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 10px; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: var(--text-muted); white-space: nowrap; transition: all 0.3s ease; }
+.steps-nav a:hover { background: var(--card-bg-light); color: white; transform: translateY(-2px); }
+.steps-nav a.active { background: rgba(16, 185, 129, 0.15); color: var(--accent); border-color: rgba(16, 185, 129, 0.3); font-weight: 600; }
+.step-num-circle { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
+.steps-nav a.active .step-num-circle { background: var(--accent); color: white; }
+
+/* ШАГИ */
+.step-section { margin-bottom: 50px; scroll-margin-top: 100px; }
+.step-card { background: var(--card-bg); border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+.step-header { padding: 30px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 20px; }
+.step-header-num { flex-shrink: 0; width: 50px; height: 50px; border-radius: 14px; background: linear-gradient(135deg, var(--accent), #059669); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 800; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); }
+.step-header-text h2 { font-size: 1.5rem; margin-bottom: 4px; }
+.step-header-text .tagline { color: var(--accent); font-size: 0.85rem; font-weight: 600; opacity: 0.9; }
+
+.step-instruction { padding: 30px; }
+.step-instruction p { color: var(--text-muted); margin-bottom: 15px; line-height: 1.7; }
+.path-box { background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: 8px; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.9rem; color: var(--text-main); border-left: 3px solid var(--vk-color); margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+.path-box .arrow { color: var(--accent); }
+.tip-box { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 16px; margin-top: 20px; }
+.tip-box h4 { color: var(--accent); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+
+/* КАРУСЕЛЬ */
+.carousel-container { background: #162032; padding: 30px; border-top: 1px solid rgba(255,255,255,0.05); }
+.carousel { display: flex; align-items: center; gap: 15px; }
+.carousel-track-wrapper { flex: 1; overflow: hidden; border-radius: 16px; background: rgba(0,0,0,0.2); position: relative; }
+.carousel-track { display: flex; transition: transform 0.4s ease; width: 100%; }
+.slide { min-width: 100%; padding: 15px; display: flex; justify-content: center; }
+.screenshot-mock { width: 100%; max-width: 240px; aspect-ratio: 9/16; background: #2d3748; border-radius: 12px; border: 2px solid rgba(255,255,255,0.1); position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.screenshot-mock::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 25px; background: #1e293b; z-index: 1; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.screenshot-mock .placeholder-icon { font-size: 3rem; margin-bottom: 15px; opacity: 0.8; }
+.screenshot-mock .placeholder-text { text-align: center; padding: 0 20px; font-weight: 600; color: #cbd5e1; z-index: 2; }
+.screenshot-mock .highlight-box { position: absolute; bottom: 15px; left: 15px; right: 15px; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent); border-radius: 8px; padding: 8px; text-align: center; font-size: 0.8rem; color: var(--accent); backdrop-filter: blur(4px); }
+.carousel-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); color: white; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; flex-shrink: 0; -webkit-tap-highlight-color: transparent; }
+.carousel-btn:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); }
+.carousel-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); border: none; cursor: pointer; transition: 0.3s; }
+.dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+
+/* КНОПКА И ФУТЕР */
+.next-area { text-align: center; padding: 40px 0 80px; }
+.btn-next { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 40px; background: var(--accent); color: white; font-size: 1.1rem; font-weight: 700; border-radius: 12px; border: none; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+.btn-next:hover { background: var(--accent-hover); transform: translateY(-3px); }
+.btn-next:active { transform: translateY(0); }
+footer { text-align: center; padding: 30px 0; border-top: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); font-size: 0.9rem; background: rgba(15, 23, 42, 0.5); }
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 900px) {
+    .steps-nav { justify-content: flex-start; padding: 10px 20px 30px; margin: 0; overflow-x: auto; flex-wrap: nowrap; }
+    .steps-nav a { flex: 0 0 auto; }
+}
+@media (max-width: 768px) {
+    .page-header h1 { font-size: 1.8rem; }
+    .step-header { padding: 20px; flex-direction: column; align-items: flex-start; gap: 15px; }
+    .step-instruction { padding: 20px; }
+    .carousel-container { padding: 20px; }
+    .screenshot-mock { max-width: 200px; }
+    .step-header-num { width: 44px; height: 44px; font-size: 1.1rem; }
+    .step-header-text h2 { font-size: 1.35rem; }
+}
+@media (max-width: 480px) {
+    .page-header h1 { font-size: 1.5rem; }
+    .container { padding: 0 16px; }
+    .nav-wrapper { padding: 0 16px; }
+    .step-header-num { width: 40px; height: 40px; font-size: 1rem; }
+    .screenshot-mock { max-width: 180px; }
+    .carousel-btn { width: 38px; height: 38px; font-size: 1rem; }
+    .path-box { font-size: 0.8rem; padding: 10px; }
+    .btn-next { width: 100%; font-size: 1rem; }
+}
