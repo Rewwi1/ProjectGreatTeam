@@ -143,65 +143,6 @@ header {
     font-size: 1.05rem;
 }
 
-/* === НАВИГАЦИЯ === */
-.steps-nav {
-    display: flex;
-    gap: 10px;
-    padding: 10px 0 30px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-    .steps-nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    .steps-nav a {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 10px 16px;
-        border-radius: 10px;
-        background: var(--card-bg);
-        border: 1px solid rgba(255,255,255,0.05);
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        white-space: nowrap;
-        transition: all 0.3s ease;
-    }
-
-        .steps-nav a:hover {
-            background: var(--card-bg-light);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .steps-nav a.active {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--accent);
-            border-color: rgba(16, 185, 129, 0.3);
-            font-weight: 600;
-        }
-
-.step-num-circle {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    font-weight: 700;
-}
-
-.steps-nav a.active .step-num-circle {
-    background: var(--accent);
-    color: white;
-}
-
 /* === ШАГИ === */
 .step-section {
     margin-bottom: 50px;
@@ -784,29 +725,93 @@ footer {
     margin: 16px 0;
 }
 
-.password-part {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 10px 14px;
-    border-radius: 999px;
-    cursor: pointer;
+.password-criterion {
+    background: transparent;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: default;
     user-select: none;
-    transition: 0.3s;
-    color: var(--text-main);
+    transition: color 0.3s, background 0.3s;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
 }
 
-    .password-part:hover {
-        background: rgba(255,255,255,0.1);
-    }
-
-    .password-part.active {
-        background: rgba(16, 185, 129, 0.15);
-        border-color: rgba(16, 185, 129, 0.35);
+    .password-criterion.active {
         color: var(--accent);
+        background: rgba(16, 185, 129, 0.1);
+        border-radius: 8px;
+        padding: 8px 12px;
     }
 
 .password-meter {
     margin-top: 12px;
+}
+
+/* === ПЕРЕКЛЮЧАТЕЛЬ ВИДА === */
+.view-switcher {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin: 40px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.switch-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    user-select: none;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.switch-label:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.switch-label input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.switch-label input[type="radio"]:hover {
+    border-color: var(--platform-color);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+}
+
+.switch-label input[type="radio"]:checked {
+    background: var(--platform-color);
+    border-color: var(--platform-color);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+}
+
+.switch-label input[type="radio"]:checked + span {
+    color: var(--platform-color);
+    font-weight: 600;
+}
+
+.screenshots-list {
+    transition: opacity 0.3s ease;
 }
 
 .meter-bar {
