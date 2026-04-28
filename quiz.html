@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина — SecureSocial</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
+            <div class="nav-actions">
+                <a href="instructions.html" class="btn-header">Инструкция</a>
+                <a href="password-tester.html" class="btn-header">Тестер пароля</a>
+                <a href="index.html" class="back-btn">← На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Проверь свои знания по безопасности</h1>
+                <p>Ответь на три вопроса про аккаунты в соцсетях и узнай свой результат.</p>
+            </div>
+        </section>
+
+        <section class="container quiz-section">
+            <div class="container">
+                <h2 class="section-title">Викторина по безопасности аккаунтов</h2>
+                <p class="section-subtitle">Проверь себя в трёх интерактивных заданиях по защите социальных сетей.</p>
+
+                <div class="step-card interactive-card">
+                    <div class="step-header">
+                        <div class="step-header-text">
+                            <h3>Детектор фишинга</h3>
+                            <span class="tagline">Перетаскивай карточки в правильную корзину: безопасно или опасно</span>
+                        </div>
+                    </div>
+                    <div class="step-instruction">
+                        <div class="drag-game">
+                            <div class="cards" id="cardsContainer"></div>
+                            <div class="drop-zones">
+                                <div class="step-card drop-zone" data-answer="safe">
+                                    <h4>Безопасно</h4>
+                                    <div class="zone-list" id="safeZone"></div>
+                                </div>
+                                <div class="step-card drop-zone" data-answer="danger">
+                                    <h4>Опасно</h4>
+                                    <div class="zone-list" id="dangerZone"></div>
+                                </div>
+                            </div>
+                            <div class="tip-box result" id="dragResult">
+                                <h4>Результат</h4>
+                                <p>Перетащи карточки в нужную корзину.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card interactive-card">
+                    <div class="step-header">
+                        <div class="step-header-text">
+                            <h3>Что опаснее?</h3>
+                            <span class="tagline">Выбирай более опасный вариант в каждой паре</span>
+                        </div>
+                    </div>
+                    <div class="step-instruction">
+                        <div class="compare-game" id="compareGame"></div>
+                        <div class="tip-box result" id="compareResult">
+                            <h4>Результат</h4>
+                            <p>Выбирай вариант в каждой строке.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card interactive-card">
+                    <div class="step-header">
+                        <div class="step-header-text">
+                            <h3>Что делать при подозрительном сообщении?</h3>
+                            <span class="tagline">Выбери самый безопасный вариант</span>
+                        </div>
+                    </div>
+                    <div class="step-instruction">
+                        <div class="scenario-quiz" id="scenarioQuiz">
+                            <button class="quiz-btn" data-correct="false">Открыть ссылку и подтвердить данные</button>
+                            <button class="quiz-btn" data-correct="true">Удалить сообщение и сообщить о фишинге</button>
+                            <button class="quiz-btn" data-correct="false">Переслать коллегам, чтобы проверить</button>
+                        </div>
+                        <div class="tip-box result" id="scenarioQuizResult">
+                            <h4>Результат</h4>
+                            <p>Нажми на лучший вариант действия, чтобы защитить аккаунт.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-total-result" id="quizTotalResult" hidden></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
+                <p>Помогает пользователям настраивать защиту аккаунтов в социальных сетях.</p>
+            </div>
+            <div class="footer-links">
+                <p>Источники:</p>
+                <a href="https://www.vk.com" target="_blank" rel="noreferrer noopener">VK Help</a>
+                <a href="https://telegram.org" target="_blank" rel="noreferrer noopener">Telegram FAQ</a>
+                <a href="https://www.tiktok.com" target="_blank" rel="noreferrer noopener">TikTok Safety</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="common.js"></script>
+</body>
+</html>

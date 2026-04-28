@@ -1,225 +1,78 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Защита TikTok — Пошаговая инструкция</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Защита TikTok — Пошаговая инструкция</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="platform-tt" data-platform="tt">
+<body>
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
+            <div class="nav-actions">
+                <a href="instructions.html" class="btn-header">Инструкция</a>
+                <a href="quiz.html" class="btn-header">Викторина</a>
+                <a href="index.html" class="back-btn">← На главную</a>
+            </div>
+        </div>
+    </header>
 
-  <header>
-    <div class="container nav-wrapper">
-      <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
-      <a href="index.html" class="back-btn">← На главную</a>
-    </div>
-  </header>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="platform-badge" style="--platform-color: var(--tt-color);">🎵 TikTok</div>
+                <h1>Защитите аккаунт за 7 шагов</h1>
+                <p>Следуйте инструкции. На каждом шаге — текст и скриншоты.</p>
+                <div class="view-switcher">
+                    <label class="switch-label"><input type="radio" name="view-mode" value="phone" checked><span>📱 Телефон</span></label>
+                    <label class="switch-label"><input type="radio" name="view-mode" value="pc"><span>💻 ПК</span></label>
+                </div>
+            </div>
+        </section>
 
-  <main class="container">
-    <div class="page-header">
-      <div class="platform-badge">🎵 TikTok</div>
-      <h1>Защитите аккаунт за 7 шагов</h1>
-      <p>Следуйте инструкции. На каждом шаге — текст и скриншоты. Листайте вниз, чтобы увидеть все картинки.</p>
-    </div>
+        <section class="container steps-section">
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">1</div><div class="step-header-text"><span class="tagline">Шаг 1 из 7</span><h2>Установите надёжный пароль</h2></div></div><div class="step-instruction"><p>Создайте сложный пароль с буквами, цифрами и символами.</p><div class="path-box"><span class="arrow">→</span> Профиль → Меню → Настройки → Безопасность → Пароль</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">2</div><div class="step-header-text"><span class="tagline">Шаг 2 из 7</span><h2>Включите двухфакторную аутентификацию (2FA)</h2></div></div><div class="step-instruction"><p>Добавляет дополнительный уровень защиты. Без кода из SMS никто не войдёт.</p><div class="path-box"><span class="arrow">→</span> Настройки → Безопасность → Двухфакторная аутентификация</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">3</div><div class="step-header-text"><span class="tagline">Шаг 3 из 7</span><h2>Настройте приватность аккаунта</h2></div></div><div class="step-instruction"><p>Сделайте аккаунт закрытым, если хотите контролировать, кто видит ваши видео.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Закрытый аккаунт</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">4</div><div class="step-header-text"><span class="tagline">Шаг 4 из 7</span><h2>Управляйте комментариями</h2></div></div><div class="step-instruction"><p>Ограничьте, кто может комментировать ваши видео.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Комментарии</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">5</div><div class="step-header-text"><span class="tagline">Шаг 5 из 7</span><h2>Настройте дуэты и загрузки</h2></div></div><div class="step-instruction"><p>Запретите другим пользователям использовать ваши видео.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Дуэты / Загрузки</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">6</div><div class="step-header-text"><span class="tagline">Шаг 6 из 7</span><h2>Проверьте активные сеансы</h2></div></div><div class="step-instruction"><p>Убедитесь, что в списке только ваши устройства.</p><div class="path-box"><span class="arrow">→</span> Настройки → Безопасность → Управление устройствами</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">7</div><div class="step-header-text"><span class="tagline">Шаг 7 из 7</span><h2>Защита от фишинга</h2></div></div><div class="step-instruction"><p>Не переходите по подозрительным ссылкам в сообщениях.</p></div></div>
+        </section>
 
-    <!-- 🔘 ПЕРЕКЛЮЧАТЕЛЬ ВИДА -->
-    <div class="view-switcher">
-      <label class="switch-label">
-        <input type="radio" name="view-mode" value="phone" checked>
-        <span>📱 Телефон</span>
-      </label>
-      <label class="switch-label">
-        <input type="radio" name="view-mode" value="pc">
-        <span>💻 ПК</span>
-      </label>
-    </div>
-
-    <!-- Шаг 1 -->
-    <section id="step-1" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">1</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 1 из 7</span>
-            <h2>Установите надёжный пароль</h2>
-          </div>
+        <!-- === ШАГ 4: ИНТЕРАКТИВНЫЙ ЧЕК-ЛИСТ === -->
+        <section class="checklist-section">
+            <div class="container">
+                <h2 class="section-title">Чек-лист безопасности</h2>
+                <p class="section-subtitle">Отмечайте выполненные шаги.</p>
+                <div class="checklist-progress"><div class="progress-bar"><div class="progress-fill"></div></div><span class="progress-text">0 / 7 выполнено</span></div>
+                <div class="checklist-container" data-platform="tt">
+                    <div class="checklist-item" data-step-id="tt-1"><input type="checkbox" id="tt-1"><label for="tt-1">Установите надёжный пароль</label></div>
+                    <div class="checklist-item" data-step-id="tt-2"><input type="checkbox" id="tt-2"><label for="tt-2">Включите двухфакторную аутентификацию (2FA)</label></div>
+                    <div class="checklist-item" data-step-id="tt-3"><input type="checkbox" id="tt-3"><label for="tt-3">Настройте приватность аккаунта</label></div>
+                    <div class="checklist-item" data-step-id="tt-4"><input type="checkbox" id="tt-4"><label for="tt-4">Управляйте комментариями</label></div>
+                    <div class="checklist-item" data-step-id="tt-5"><input type="checkbox" id="tt-5"><label for="tt-5">Настройте дуэты и загрузки</label></div>
+                    <div class="checklist-item" data-step-id="tt-6"><input type="checkbox" id="tt-6"><label for="tt-6">Проверьте активные сеансы</label></div>
+                    <div class="checklist-item" data-step-id="tt-7"><input type="checkbox" id="tt-7"><label for="tt-7">Защита от фишинга</label></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
+                <p>Помогает пользователям настраивать защиту аккаунтов в социальных сетях.</p>
+            </div>
+            <div class="footer-links">
+                <p>Источники:</p>
+                <a href="https://www.vk.com" target="_blank" rel="noreferrer noopener">VK Help</a>
+                <a href="https://telegram.org" target="_blank" rel="noreferrer noopener">Telegram FAQ</a>
+                <a href="https://www.tiktok.com" target="_blank" rel="noreferrer noopener">TikTok Safety</a>
+            </div>
         </div>
-        <div class="step-instruction">
-          <p>Создайте сложный пароль с буквами, цифрами и символами. Не используйте дату рождения или имя.</p>
-          <div class="path-box">Профиль <span class="arrow">→</span> Меню <span class="arrow">→</span> Настройки <span class="arrow">→</span> Безопасность <span class="arrow">→</span> Пароль</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tt1-phone-1.png" class="img-view img-phone" alt=""><img src="tt1-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tt1-phone-3.png" class="img-view img-phone" alt=""><img src="tt1-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tt1-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tt1-pc-1.png" class="img-view img-pc" alt=""><img src="tt1-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tt1-pc-3.png" class="img-view img-pc" alt=""><img src="tt1-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tt1-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 2 -->
-    <section id="step-2" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">2</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 2 из 7</span>
-            <h2>Включите двухфакторную аутентификацию (2FA)</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Добавляет дополнительный уровень защиты. Без кода из SMS или приложения-аутентификатора никто не войдёт.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Безопасность <span class="arrow">→</span> Двухфакторная аутентификация</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tt2-phone-1.png" class="img-view img-phone" alt=""><img src="tt2-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tt2-phone-3.png" class="img-view img-phone" alt=""><img src="tt2-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tt2-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tt2-pc-1.png" class="img-view img-pc" alt=""><img src="tt2-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tt2-pc-3.png" class="img-view img-pc" alt=""><img src="tt2-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tt2-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 3 -->
-    <section id="step-3" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">3</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 3 из 7</span>
-            <h2>Настройте приватность аккаунта</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Сделайте аккаунт закрытым, если хотите контролировать, кто может смотреть ваши видео. Одобрение подписчиков вручную.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Конфиденциальность <span class="arrow">→</span> Закрытый аккаунт</div>
-          <div class="tip-box"><h4>🔍 Совет</h4><p>Закрытый аккаунт защищает от нежелательных комментариев и спама. Подписчики смогут видеть ваши видео только после вашего одобрения.</p></div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tt3-phone-1.png" class="img-view img-phone" alt=""><img src="tt3-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tt3-phone-3.png" class="img-view img-phone" alt=""><img src="tt3-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tt3-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tt3-pc-1.png" class="img-view img-pc" alt=""><img src="tt3-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tt3-pc-3.png" class="img-view img-pc" alt=""><img src="tt3-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tt3-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 4 -->
-    <section id="step-4" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">4</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 4 из 7</span>
-            <h2>Управляйте комментариями</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Ограничьте, кто может комментировать ваши видео. Можно разрешить только друзьям или подписчикам.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Конфиденциальность <span class="arrow">→</span> Комментарии</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tt4-phone-1.png" class="img-view img-phone" alt=""><img src="tt4-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tt4-phone-3.png" class="img-view img-phone" alt=""><img src="tt4-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tt4-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tt4-pc-1.png" class="img-view img-pc" alt=""><img src="tt4-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tt4-pc-3.png" class="img-view img-pc" alt=""><img src="tt4-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tt4-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 5 -->
-    <section id="step-5" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">5</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 5 из 7</span>
-            <h2>Настройте дуэты и загрузки</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Запретите другим пользователям использовать ваши видео для дуэтов или сохранять их на устройство.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Конфиденциальность <span class="arrow">→</span> Дуэты / Загрузки</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tt5-phone-1.png" class="img-view img-phone" alt=""><img src="tt5-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tt5-phone-3.png" class="img-view img-phone" alt=""><img src="tt5-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tt5-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tt5-pc-1.png" class="img-view img-pc" alt=""><img src="tt5-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tt5-pc-3.png" class="img-view img-pc" alt=""><img src="tt5-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tt5-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 6 -->
-    <section id="step-6" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">6</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 6 из 7</span>
-            <h2>Проверьте активные сеансы</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Убедитесь, что в списке только ваши устройства. Завершите подозрительные сеансы немедленно.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Безопасность <span class="arrow">→</span> Управление устройствами</div>
-          <div class="tip-box"><h4>🛡️ Рекомендация</h4><p>Проверяйте этот раздел раз в месяц. TikTok показывает модель устройства и дату последнего входа.</p></div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tt6-phone-1.png" class="img-view img-phone" alt=""><img src="tt6-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tt6-phone-3.png" class="img-view img-phone" alt=""><img src="tt6-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tt6-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tt6-pc-1.png" class="img-view img-pc" alt=""><img src="tt6-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tt6-pc-3.png" class="img-view img-pc" alt=""><img src="tt6-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tt6-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 7 -->
-    <section id="step-7" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">7</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 7 из 7</span>
-            <h2>Защита от фишинга</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Не переходите по подозрительным ссылкам в сообщениях. TikTok никогда не просит пароль в личных сообщениях.</p>
-        </div>
-        <div class="screenshots-list">
-          <img src="tt7-phone-1.png" class="img-view img-phone" alt=""><img src="tt7-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tt7-phone-3.png" class="img-view img-phone" alt=""><img src="tt7-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tt7-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tt7-pc-1.png" class="img-view img-pc" alt=""><img src="tt7-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tt7-pc-3.png" class="img-view img-pc" alt=""><img src="tt7-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tt7-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <div class="next-area">
-      <a href="#" class="btn-next">Далее →</a>
-    </div>
-  </main>
-
-  <footer>
-    <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
-  </footer>
-
-  <script src="common.js"></script>
+    </footer>
+    <script src="common.js"></script>
 </body>
 </html>
-

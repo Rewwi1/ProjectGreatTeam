@@ -1,226 +1,78 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Защита Telegram — Пошаговая инструкция</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Защита Telegram — Пошаговая инструкция</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="platform-tg" data-platform="tg">
+<body>
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
+            <div class="nav-actions">
+                <a href="instructions.html" class="btn-header">Инструкция</a>
+                <a href="quiz.html" class="btn-header">Викторина</a>
+                <a href="index.html" class="back-btn">← На главную</a>
+            </div>
+        </div>
+    </header>
 
-  <header>
-    <div class="container nav-wrapper">
-      <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
-      <a href="index.html" class="back-btn">← На главную</a>
-    </div>
-  </header>
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="platform-badge" style="--platform-color: var(--tg-color);">✈️ Telegram</div>
+                <h1>Защитите аккаунт за 7 шагов</h1>
+                <p>Следуйте инструкции. На каждом шаге — текст и скриншоты.</p>
+                <div class="view-switcher">
+                    <label class="switch-label"><input type="radio" name="view-mode" value="phone" checked><span>📱 Телефон</span></label>
+                    <label class="switch-label"><input type="radio" name="view-mode" value="pc"><span>💻 ПК</span></label>
+                </div>
+            </div>
+        </section>
 
-  <main class="container">
-    <div class="page-header">
-      <div class="platform-badge">✈️ Telegram</div>
-      <h1>Защитите аккаунт за 7 шагов</h1>
-      <p>Следуйте инструкции. На каждом шаге — текст и скриншоты. Листайте вниз, чтобы увидеть все картинки.</p>
-    </div>
+        <section class="container steps-section">
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">1</div><div class="step-header-text"><span class="tagline">Шаг 1 из 7</span><h2>Установите код-пароль</h2></div></div><div class="step-instruction"><p>Заблокируйте доступ к приложению PIN-кодом или отпечатком пальца.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Код-пароль</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">2</div><div class="step-header-text"><span class="tagline">Шаг 2 из 7</span><h2>Включите облачный пароль (2FA)</h2></div></div><div class="step-instruction"><p>Дополнительная защита при входе с нового устройства.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Облачный пароль</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">3</div><div class="step-header-text"><span class="tagline">Шаг 3 из 7</span><h2>Проверьте активные сеансы</h2></div></div><div class="step-instruction"><p>Убедитесь, что в список вошли только ваши устройства.</p><div class="path-box"><span class="arrow">→</span> Настройки → Устройства → Завершить все другие сеансы</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">4</div><div class="step-header-text"><span class="tagline">Шаг 4 из 7</span><h2>Скройте номер телефона</h2></div></div><div class="step-instruction"><p>Сделайте номер невидимым для всех, кроме ваших контактов.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Номер телефона → Никто</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">5</div><div class="step-header-text"><span class="tagline">Шаг 5 из 7</span><h2>Ограничьте фото профиля</h2></div></div><div class="step-instruction"><p>Запретите незнакомцам сохранять и пересылать ваше фото.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Фото и видео → Мои контакты</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">6</div><div class="step-header-text"><span class="tagline">Шаг 6 из 7</span><h2>Запретите пересылку</h2></div></div><div class="step-instruction"><p>Скройте ссылку на ваш профиль при пересылке сообщений.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Пересылка сообщений → Никто</div></div></div>
+            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">7</div><div class="step-header-text"><span class="tagline">Шаг 7 из 7</span><h2>Настройте автоблокировку</h2></div></div><div class="step-instruction"><p>Автоматически требуйте код-пароль через 1 минуту неактивности.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Код-пароль → Автоблокировка</div></div></div>
+        </section>
 
-    <!-- 🔘 ПЕРЕКЛЮЧАТЕЛЬ ВИДА -->
-    <div class="view-switcher">
-      <label class="switch-label">
-        <input type="radio" name="view-mode" value="phone" checked>
-        <span>📱 Телефон</span>
-      </label>
-      <label class="switch-label">
-        <input type="radio" name="view-mode" value="pc">
-        <span>💻 ПК</span>
-      </label>
-    </div>
-
-
-    <!-- Шаг 1 -->
-    <section id="step-1" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">1</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 1 из 7</span>
-            <h2>Установите код-пароль</h2>
-          </div>
+        <!-- === ШАГ 4: ИНТЕРАКТИВНЫЙ ЧЕК-ЛИСТ === -->
+        <section class="checklist-section">
+            <div class="container">
+                <h2 class="section-title">Чек-лист безопасности</h2>
+                <p class="section-subtitle">Отмечайте выполненные шаги.</p>
+                <div class="checklist-progress"><div class="progress-bar"><div class="progress-fill"></div></div><span class="progress-text">0 / 7 выполнено</span></div>
+                <div class="checklist-container" data-platform="tg">
+                    <div class="checklist-item" data-step-id="tg-1"><input type="checkbox" id="tg-1"><label for="tg-1">Установите код-пароль</label></div>
+                    <div class="checklist-item" data-step-id="tg-2"><input type="checkbox" id="tg-2"><label for="tg-2">Включите облачный пароль (2FA)</label></div>
+                    <div class="checklist-item" data-step-id="tg-3"><input type="checkbox" id="tg-3"><label for="tg-3">Проверьте активные сеансы</label></div>
+                    <div class="checklist-item" data-step-id="tg-4"><input type="checkbox" id="tg-4"><label for="tg-4">Скройте номер телефона</label></div>
+                    <div class="checklist-item" data-step-id="tg-5"><input type="checkbox" id="tg-5"><label for="tg-5">Ограничьте фото профиля</label></div>
+                    <div class="checklist-item" data-step-id="tg-6"><input type="checkbox" id="tg-6"><label for="tg-6">Запретите пересылку</label></div>
+                    <div class="checklist-item" data-step-id="tg-7"><input type="checkbox" id="tg-7"><label for="tg-7">Настройте автоблокировку</label></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
+                <p>Помогает пользователям настраивать защиту аккаунтов в социальных сетях.</p>
+            </div>
+            <div class="footer-links">
+                <p>Источники:</p>
+                <a href="https://www.vk.com" target="_blank" rel="noreferrer noopener">VK Help</a>
+                <a href="https://telegram.org" target="_blank" rel="noreferrer noopener">Telegram FAQ</a>
+                <a href="https://www.tiktok.com" target="_blank" rel="noreferrer noopener">TikTok Safety</a>
+            </div>
         </div>
-        <div class="step-instruction">
-          <p>Заблокируйте доступ к приложению PIN-кодом или отпечатком пальца. Это защитит переписку при потере телефона.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Конфиденциальность <span class="arrow">→</span> Код-пароль</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tg1-phone-1.png" class="img-view img-phone" alt=""><img src="tg1-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tg1-phone-3.png" class="img-view img-phone" alt=""><img src="tg1-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tg1-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tg1-pc-1.png" class="img-view img-pc" alt=""><img src="tg1-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tg1-pc-3.png" class="img-view img-pc" alt=""><img src="tg1-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tg1-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 2 -->
-    <section id="step-2" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">2</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 2 из 7</span>
-            <h2>Включите облачный пароль (2FA)</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Дополнительная защита при входе с нового устройства. Без этого пароля злоумышленник не сможет войти, даже имея доступ к SMS.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Конфиденциальность <span class="arrow">→</span> Облачный пароль</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tg2-phone-1.png" class="img-view img-phone" alt=""><img src="tg2-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tg2-phone-3.png" class="img-view img-phone" alt=""><img src="tg2-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tg2-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tg2-pc-1.png" class="img-view img-pc" alt=""><img src="tg2-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tg2-pc-3.png" class="img-view img-pc" alt=""><img src="tg2-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tg2-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 3 -->
-    <section id="step-3" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">3</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 3 из 7</span>
-            <h2>Проверьте активные сеансы</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Убедитесь, что в список вошли только ваши устройства. Завершите подозрительные сеансы немедленно.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Устройства <span class="arrow">→</span> Завершить все другие сеансы</div>
-          <div class="tip-box"><h4>🛡️ Совет</h4><p>Проверяйте этот раздел раз в месяц. Telegram показывает город и модель устройства.</p></div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tg3-phone-1.png" class="img-view img-phone" alt=""><img src="tg3-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tg3-phone-3.png" class="img-view img-phone" alt=""><img src="tg3-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tg3-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tg3-pc-1.png" class="img-view img-pc" alt=""><img src="tg3-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tg3-pc-3.png" class="img-view img-pc" alt=""><img src="tg3-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tg3-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 4 -->
-    <section id="step-4" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">4</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 4 из 7</span>
-            <h2>Скройте номер телефона</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Сделайте номер невидимым для всех, кроме ваших контактов. Это защитит от спама и нежелательных звонков.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Конфиденциальность <span class="arrow">→</span> Номер телефона <span class="arrow">→</span> Никто</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tg4-phone-1.png" class="img-view img-phone" alt=""><img src="tg4-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tg4-phone-3.png" class="img-view img-phone" alt=""><img src="tg4-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tg4-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tg4-pc-1.png" class="img-view img-pc" alt=""><img src="tg4-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tg4-pc-3.png" class="img-view img-pc" alt=""><img src="tg4-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tg4-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 5 -->
-    <section id="step-5" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">5</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 5 из 7</span>
-            <h2>Ограничьте фото профиля</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Запретите незнакомцам сохранять и пересылать ваше фото. Только контакты смогут видеть его полностью.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Конфиденциальность <span class="arrow">→</span> Фото и видео <span class="arrow">→</span> Мои контакты</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tg5-phone-1.png" class="img-view img-phone" alt=""><img src="tg5-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tg5-phone-3.png" class="img-view img-phone" alt=""><img src="tg5-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tg5-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tg5-pc-1.png" class="img-view img-pc" alt=""><img src="tg5-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tg5-pc-3.png" class="img-view img-pc" alt=""><img src="tg5-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tg5-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 6 -->
-    <section id="step-6" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">6</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 6 из 7</span>
-            <h2>Запретите пересылку</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Скройте ссылку на ваш профиль при пересылке сообщений. Никто не сможет перейти в ваш аккаунт из чужого диалога.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Конфиденциальность <span class="arrow">→</span> Пересылка сообщений <span class="arrow">→</span> Никто</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tg6-phone-1.png" class="img-view img-phone" alt=""><img src="tg6-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tg6-phone-3.png" class="img-view img-phone" alt=""><img src="tg6-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tg6-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tg6-pc-1.png" class="img-view img-pc" alt=""><img src="tg6-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tg6-pc-3.png" class="img-view img-pc" alt=""><img src="tg6-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tg6-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- Шаг 7 -->
-    <section id="step-7" class="step-section">
-      <div class="step-card">
-        <div class="step-header">
-          <div class="step-header-num">7</div>
-          <div class="step-header-text">
-            <span class="tagline">Шаг 7 из 7</span>
-            <h2>Настройте автоблокировку</h2>
-          </div>
-        </div>
-        <div class="step-instruction">
-          <p>Автоматически требуйте код-пароль через 1 минуту неактивности. Это мгновенно закроет доступ, если телефон выпал из рук.</p>
-          <div class="path-box">Настройки <span class="arrow">→</span> Конфиденциальность <span class="arrow">→</span> Код-пароль <span class="arrow">→</span> Автоблокировка</div>
-        </div>
-        <div class="screenshots-list">
-          <img src="tg7-phone-1.png" class="img-view img-phone" alt=""><img src="tg7-phone-2.png" class="img-view img-phone" alt="">
-          <img src="tg7-phone-3.png" class="img-view img-phone" alt=""><img src="tg7-phone-4.png" class="img-view img-phone" alt="">
-          <img src="tg7-phone-5.png" class="img-view img-phone" alt="">
-          <img src="tg7-pc-1.png" class="img-view img-pc" alt=""><img src="tg7-pc-2.png" class="img-view img-pc" alt="">
-          <img src="tg7-pc-3.png" class="img-view img-pc" alt=""><img src="tg7-pc-4.png" class="img-view img-pc" alt="">
-          <img src="tg7-pc-5.png" class="img-view img-pc" alt="">
-        </div>
-      </div>
-    </section>
-
-    <div class="next-area">
-      <a href="#" class="btn-next">Далее →</a>
-    </div>
-  </main>
-
-  <footer>
-    <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
-  </footer>
-
-  <script src="common.js"></script>
+    </footer>
+    <script src="common.js"></script>
 </body>
 </html>
-

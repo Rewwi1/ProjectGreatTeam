@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -11,9 +11,14 @@
     <!-- Шапка -->
     <header>
         <div class="container nav-wrapper">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 🛡️ <span>SecureSocial</span>
             </a>
+            <div class="nav-actions">
+                <a href="instructions.html" class="btn-header">Инструкция</a>
+                <a href="quiz.html" class="btn-header">Викторина</a>
+                <a href="password-tester.html" class="btn-header">Тестер пароля</a>
+            </div>
         </div>
     </header>
 
@@ -173,100 +178,21 @@
         </div>
     </section>
 
-    <!-- Интерактивы -->
-    <section class="infographic-section interactive-section">
-        <div class="container">
-            <h2 class="section-title">Интерактивы по безопасности</h2>
-            <p class="section-subtitle">Проверь свою цифровую защиту в Telegram, TikTok и ВКонтакте</p>
-
-            <!-- Детектор фишинга -->
-            <div class="step-card interactive-card">
-                <div class="step-header">
-                    <div class="step-header-text">
-                        <h3>Детектор фишинга</h3>
-                        <span class="tagline">Перетаскивай карточки в правильную корзину: безопасно или опасно</span>
-                    </div>
-                </div>
-
-                <div class="step-instruction">
-                    <div class="drag-game">
-                        <div class="cards" id="cardsContainer"></div>
-
-                        <div class="drop-zones">
-                            <div class="step-card drop-zone" data-answer="safe">
-                                <h4>Безопасно</h4>
-                                <div class="zone-list" id="safeZone"></div>
-                            </div>
-
-                            <div class="step-card drop-zone" data-answer="danger">
-                                <h4>Опасно</h4>
-                                <div class="zone-list" id="dangerZone"></div>
-                            </div>
-                        </div>
-
-                        <div class="tip-box result" id="dragResult">
-                            <h4>Результат</h4>
-                            <p>Перетащи карточки в нужную корзину.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Что опаснее? -->
-            <div class="step-card interactive-card">
-                <div class="step-header">
-                    <div class="step-header-text">
-                        <h3>Что опаснее?</h3>
-                        <span class="tagline">Выбирай более опасный вариант в каждой паре</span>
-                    </div>
-                </div>
-
-                <div class="step-instruction">
-                    <div class="compare-game" id="compareGame"></div>
-
-                    <div class="tip-box result" id="compareResult">
-                        <h4>Результат</h4>
-                        <p>Выбирай вариант в каждой строке.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Конструктор пароля -->
-            <div class="step-card interactive-card">
-                <div class="step-header">
-                    <div class="step-header-text">
-                        <h3>Конструктор безопасного пароля</h3>
-                        <span class="tagline">Введи свой пароль или сгенерируй новый и смотри его силу</span>
-                    </div>
-                </div>
-
-                <div class="step-instruction">
-                    <div class="password-builder">
-                        <div class="password-output">
-                            <input type="text" id="passwordInput" placeholder="Введи пароль вручную или нажми «Сгенерировать»">
-                            <button id="generatePasswordBtn" class="btn" type="button">Сгенерировать</button>
-                            <button id="clearPasswordBtn" class="btn" type="button">Очистить</button>
-                        </div>
-
-                        <div class="password-parts" id="passwordParts"></div>
-
-                        <div class="password-meter">
-                            <div class="meter-bar">
-                                <div class="meter-fill" id="meterFill"></div>
-                            </div>
-                            <div class="meter-text" id="meterText">Сила пароля: —</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
+    
 
     <!-- Подвал -->
-    <footer id="about">
-        <div class="container">
-            <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
+                <p>Помогает пользователям настраивать защиту аккаунтов в социальных сетях.</p>
+            </div>
+            <div class="footer-links">
+                <p>Источники:</p>
+                <a href="https://www.vk.com" target="_blank" rel="noreferrer noopener">VK Help</a>
+                <a href="https://telegram.org" target="_blank" rel="noreferrer noopener">Telegram FAQ</a>
+                <a href="https://www.tiktok.com" target="_blank" rel="noreferrer noopener">TikTok Safety</a>
+            </div>
         </div>
     </footer>
 
