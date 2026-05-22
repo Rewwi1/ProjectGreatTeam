@@ -391,28 +391,55 @@
     if (checklistContainer) {
         const platform = checklistContainer.dataset.platform || 'unknown';
         const storageKey = `checklist-${platform}`;
-        const savedState = JSON.parse(localStorage.getItem(storageKey)) || {};
+        let savedState = {};
+        try { savedState = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch (e) { savedState = {}; }
         const progressFill = document.querySelector('.progress-fill');
         const progressText = document.querySelector('.progress-text');
         const items = checklistContainer.querySelectorAll('.checklist-item');
+
+        const finishButton = document.getElementById('finishChecklist');
+
+        const updateFinishButton = () => {
+            if (!finishButton) return;
+            const checked = checklistContainer.querySelectorAll('input:checked').length;
+            const allDone = checked === items.length;
+            finishButton.disabled = !allDone;
+            finishButton.classList.toggle('btn-success', allDone);
+            finishButton.classList.toggle('btn-disabled', !allDone);
+        };
 
         const updateProgress = () => {
             const checked = checklistContainer.querySelectorAll('input:checked').length;
             const percent = items.length ? Math.round((checked / items.length) * 100) : 0;
             if (progressFill) progressFill.style.width = `${percent}%`;
             if (progressText) progressText.textContent = `${checked} / ${items.length} выполнено`;
+            updateFinishButton();
         };
 
         const saveState = () => {
             const state = {};
-            checklistContainer.querySelectorAll('input').forEach(i => state[i.dataset.stepId] = i.checked);
+            checklistContainer.querySelectorAll('.checklist-item').forEach(item => {
+                const stepId = item.dataset.stepId;
+                const input = item.querySelector('input');
+                if (stepId && input) state[stepId] = input.checked;
+            });
             try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch(e) {}
             updateProgress();
         };
 
+        finishButton?.addEventListener('click', () => {
+            if (finishButton.disabled) return;
+            window.location.href = 'index.html';
+        });
+
         items.forEach(item => {
             const cb = item.querySelector('input');
-            if (savedState[cb.dataset.stepId]) { cb.checked = true; item.classList.add('completed'); }
+            const stepId = item.dataset.stepId;
+            cb.checked = false;
+            if (savedState[stepId]) {
+                cb.checked = true;
+                item.classList.add('completed');
+            }
 
             const toggle = () => {
                 cb.checked = !cb.checked;

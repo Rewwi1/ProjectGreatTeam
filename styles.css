@@ -79,7 +79,26 @@ header {
 .page-header p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
 
 /* === ШАГИ === */
-.step-section { margin-bottom: 50px; scroll-margin-top: 100px; }
+.step-section, .steps-section { margin-bottom: 50px; scroll-margin-top: 100px; }
+.page-action { display: flex; justify-content: center; width: 100%; padding: 26px 0; margin: 40px 0; }
+.page-action .container { display: flex; justify-content: center; }
+.page-action .btn-header { min-width: 180px; max-width: 220px; width: fit-content; }
+.btn-header:disabled, .btn-header.btn-disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+.btn-success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(16, 185, 129, 0.2));
+    border-color: rgba(16, 185, 129, 0.55);
+}
+.finish-result {
+    margin-top: 18px;
+    color: #a5f3c1;
+    font-weight: 700;
+    text-align: center;
+}
 .step-card {
     background: var(--card-bg); border-radius: 20px;
     border: 1px solid rgba(255,255,255,0.05); overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
@@ -274,11 +293,13 @@ footer { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1); color: va
 .switch-label input[type="radio"]:hover { border-color: var(--platform-color); box-shadow: 0 0 8px rgba(16, 185, 129, 0.2); }
 .switch-label input[type="radio"]:checked { background: var(--platform-color); border-color: var(--platform-color); box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2); }
 .switch-label input[type="radio"]:checked + span { color: var(--platform-color); font-weight: 600; }
-.screenshots-list { display: grid; gap: 12px; margin-top: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); transition: opacity 0.3s ease; }
-.screenshot { display: none; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); min-height: 180px; }
+.screenshots-list { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; justify-content: center; align-items: flex-start; transition: opacity 0.3s ease; }
+.screenshot { display: none; overflow: hidden; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); width: min(100%, 464px); aspect-ratio: 464 / 348; }
 .screenshot img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
 body.view-phone .screenshot.phone,
 body.view-pc .screenshot.pc { display: block; }
+
+body.tt-page .screenshot { display: block; }
 
 .image-lightbox { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; }
 .image-lightbox:not(.hidden) { opacity: 1; pointer-events: auto; }
@@ -301,7 +322,6 @@ body.view-pc .screenshot.pc { display: block; }
 .requirements-list { display: flex; flex-direction: column; gap: 16px; }
 .requirement-item { display: flex; gap: 16px; padding: 16px; background: rgba(16, 185, 129, 0.05); border-left: 3px solid var(--accent); border-radius: 8px; align-items: flex-start; }
 .requirement-icon { font-size: 1.4rem; font-weight: bold; min-width: 30px; text-align: center; }
-.requirement-item:has(.requirement-icon:contains("✗")) { background: rgba(217, 75, 75, 0.05); border-left-color: #d94b4b; }
 .requirement-content h4 { margin-bottom: 6px; font-size: 1rem; color: var(--text-main); }
 .requirement-content p { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
 .examples-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
@@ -353,11 +373,9 @@ body.view-pc .screenshot.pc { display: block; }
     .stat-item { padding: 15px 10px; }
     .stat-number { font-size: 2rem; }
     .platform-card { padding: 30px 20px; }
-    body.view-phone .screenshots-list { grid-template-columns: repeat(2, 1fr); }
-    body.view-pc .screenshots-list { grid-template-columns: 1fr; }
+    .screenshot { width: 100%; }
     .btn-next { width: 100%; font-size: 1rem; }
     .examples-list { grid-template-columns: 1fr; }
-    .screenshots-list { grid-template-columns: 1fr; }
     .requirement-item { padding: 12px; gap: 12px; }
     .requirement-icon { font-size: 1.2rem; min-width: 24px; }
     .requirement-content h4 { font-size: 0.95rem; }
