@@ -294,6 +294,98 @@
         });
     }
 
+    function initScreenshotLightbox() {
+        const overlay = document.createElement('div');
+        overlay.className = 'image-lightbox hidden';
+        overlay.innerHTML = `
+            <div class="lightbox-backdrop"></div>
+            <div class="lightbox-content">
+                <button class="lightbox-close" type="button" aria-label="Закрыть">×</button>
+                <button class="lightbox-prev" type="button" aria-label="Предыдущее">‹</button>
+                <div class="lightbox-frame"><img src="" alt="" /></div>
+                <button class="lightbox-next" type="button" aria-label="Следующее">›</button>
+                <div class="lightbox-counter"></div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        const imgElement = overlay.querySelector('.lightbox-frame img');
+        const closeBtn = overlay.querySelector('.lightbox-close');
+        const prevBtn = overlay.querySelector('.lightbox-prev');
+        const nextBtn = overlay.querySelector('.lightbox-next');
+        const counter = overlay.querySelector('.lightbox-counter');
+        const content = overlay.querySelector('.lightbox-content');
+        let gallery = [];
+        let currentIndex = 0;
+
+        const updateLightbox = () => {
+            const item = gallery[currentIndex];
+            if (!item) return;
+            imgElement.src = item.src;
+            imgElement.alt = item.alt || '';
+            counter.textContent = gallery.length > 1 ? `${currentIndex + 1} / ${gallery.length}` : '';
+            content.classList.toggle('has-controls', gallery.length > 1);
+        };
+
+        const closeLightbox = () => {
+            overlay.classList.add('hidden');
+            document.documentElement.style.overflow = '';
+        };
+
+        const openLightbox = () => {
+            overlay.classList.remove('hidden');
+            document.documentElement.style.overflow = 'hidden';
+            updateLightbox();
+        };
+
+        const visibleImages = (container) => {
+            return Array.from(container.querySelectorAll('img')).filter(img => {
+                const screenshot = img.closest('.screenshot');
+                return screenshot && window.getComputedStyle(screenshot).display !== 'none';
+            });
+        };
+
+        document.querySelectorAll('.screenshots-list').forEach(list => {
+            const images = Array.from(list.querySelectorAll('img'));
+            if (!images.length) return;
+            images.forEach((img) => {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', () => {
+                    const visible = visibleImages(list);
+                    gallery = visible.map(el => ({ src: el.src, alt: el.alt }));
+                    currentIndex = visible.indexOf(img);
+                    if (currentIndex < 0) currentIndex = 0;
+                    openLightbox();
+                });
+            });
+        });
+
+        closeBtn.addEventListener('click', closeLightbox);
+        overlay.querySelector('.lightbox-backdrop').addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+            updateLightbox();
+        });
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % gallery.length;
+            updateLightbox();
+        });
+        window.addEventListener('keydown', (e) => {
+            if (overlay.classList.contains('hidden')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft' && gallery.length > 1) {
+                currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+                updateLightbox();
+            }
+            if (e.key === 'ArrowRight' && gallery.length > 1) {
+                currentIndex = (currentIndex + 1) % gallery.length;
+                updateLightbox();
+            }
+        });
+    }
+
+    initScreenshotLightbox();
+
     // === ИНТЕРАКТИВНЫЙ ЧЕК-ЛИСТ (ШАГ 4) ===
     const checklistContainer = document.querySelector('.checklist-container');
     if (checklistContainer) {
