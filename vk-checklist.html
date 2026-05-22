@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Чеклист ВКонтакте — SecureSocial</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
+            <div class="nav-actions">
+                <a href="vkSecure.html" class="btn-header">Назад к VK</a>
+                <a href="index.html" class="back-btn">← На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <div class="platform-badge" style="--platform-color: var(--vk-color);">🔵 ВКонтакте</div>
+                <h1>Чеклист безопасности</h1>
+                <p>Здесь вы можете отметить выполненные шаги для защиты аккаунта.</p>
+            </div>
+        </section>
+
+        <section class="checklist-section">
+            <div class="container">
+                <h2 class="section-title">VK-чеклист</h2>
+                <p class="section-subtitle">Отмечайте пункты по мере выполнения.</p>
+                <div class="checklist-progress"><div class="progress-bar"><div class="progress-fill"></div></div><span class="progress-text">0 / 7 выполнено</span></div>
+                <div class="checklist-container" data-platform="vk">
+                    <div class="checklist-item" data-step-id="vk-1"><input type="checkbox" id="vk-1"><label for="vk-1">Установите надёжный пароль</label></div>
+                    <div class="checklist-item" data-step-id="vk-2"><input type="checkbox" id="vk-2"><label for="vk-2">Включите двухфакторную аутентификацию (2FA)</label></div>
+                    <div class="checklist-item" data-step-id="vk-3"><input type="checkbox" id="vk-3"><label for="vk-3">Настройте приватность</label></div>
+                    <div class="checklist-item" data-step-id="vk-4"><input type="checkbox" id="vk-4"><label for="vk-4">Проверьте активные сессии</label></div>
+                    <div class="checklist-item" data-step-id="vk-5"><input type="checkbox" id="vk-5"><label for="vk-5">Удалите лишние приложения</label></div>
+                    <div class="checklist-item" data-step-id="vk-6"><input type="checkbox" id="vk-6"><label for="vk-6">Убедитесь в безопасности</label></div>
+                    <div class="checklist-item" data-step-id="vk-7"><input type="checkbox" id="vk-7"><label for="vk-7">Защита от фишинга</label></div>
+                </div>
+                <div class="page-action"><button id="finishChecklist" class="btn-header btn-complete" disabled>Завершить</button></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>2026 SecureSocial. Учебный проект по кибербезопасности.</p>
+            </div>
+            <div class="footer-links">
+                <p>Источники:</p>
+                <a href="https://www.vk.com" target="_blank" rel="noreferrer noopener">VK Help</a>
+            </div>
+        </div>
+    </footer>
+    <script src="common.js"></script>
+</body>
+</html>

@@ -294,33 +294,152 @@
         });
     }
 
+    function initScreenshotLightbox() {
+        const overlay = document.createElement('div');
+        overlay.className = 'image-lightbox hidden';
+        overlay.innerHTML = `
+            <div class="lightbox-backdrop"></div>
+            <div class="lightbox-content">
+                <button class="lightbox-close" type="button" aria-label="Закрыть">×</button>
+                <button class="lightbox-prev" type="button" aria-label="Предыдущее">‹</button>
+                <div class="lightbox-frame"><img src="" alt="" /></div>
+                <button class="lightbox-next" type="button" aria-label="Следующее">›</button>
+                <div class="lightbox-counter"></div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        const imgElement = overlay.querySelector('.lightbox-frame img');
+        const closeBtn = overlay.querySelector('.lightbox-close');
+        const prevBtn = overlay.querySelector('.lightbox-prev');
+        const nextBtn = overlay.querySelector('.lightbox-next');
+        const counter = overlay.querySelector('.lightbox-counter');
+        const content = overlay.querySelector('.lightbox-content');
+        let gallery = [];
+        let currentIndex = 0;
+
+        const updateLightbox = () => {
+            const item = gallery[currentIndex];
+            if (!item) return;
+            imgElement.src = item.src;
+            imgElement.alt = item.alt || '';
+            counter.textContent = gallery.length > 1 ? `${currentIndex + 1} / ${gallery.length}` : '';
+            content.classList.toggle('has-controls', gallery.length > 1);
+        };
+
+        const closeLightbox = () => {
+            overlay.classList.add('hidden');
+            document.documentElement.style.overflow = '';
+        };
+
+        const openLightbox = () => {
+            overlay.classList.remove('hidden');
+            document.documentElement.style.overflow = 'hidden';
+            updateLightbox();
+        };
+
+        const visibleImages = (container) => {
+            return Array.from(container.querySelectorAll('img')).filter(img => {
+                const screenshot = img.closest('.screenshot');
+                return screenshot && window.getComputedStyle(screenshot).display !== 'none';
+            });
+        };
+
+        document.querySelectorAll('.screenshots-list').forEach(list => {
+            const images = Array.from(list.querySelectorAll('img'));
+            if (!images.length) return;
+            images.forEach((img) => {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', () => {
+                    const visible = visibleImages(list);
+                    gallery = visible.map(el => ({ src: el.src, alt: el.alt }));
+                    currentIndex = visible.indexOf(img);
+                    if (currentIndex < 0) currentIndex = 0;
+                    openLightbox();
+                });
+            });
+        });
+
+        closeBtn.addEventListener('click', closeLightbox);
+        overlay.querySelector('.lightbox-backdrop').addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+            updateLightbox();
+        });
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % gallery.length;
+            updateLightbox();
+        });
+        window.addEventListener('keydown', (e) => {
+            if (overlay.classList.contains('hidden')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft' && gallery.length > 1) {
+                currentIndex = (currentIndex - 1 + gallery.length) % gallery.length;
+                updateLightbox();
+            }
+            if (e.key === 'ArrowRight' && gallery.length > 1) {
+                currentIndex = (currentIndex + 1) % gallery.length;
+                updateLightbox();
+            }
+        });
+    }
+
+    initScreenshotLightbox();
+
     // === ИНТЕРАКТИВНЫЙ ЧЕК-ЛИСТ (ШАГ 4) ===
     const checklistContainer = document.querySelector('.checklist-container');
     if (checklistContainer) {
         const platform = checklistContainer.dataset.platform || 'unknown';
         const storageKey = `checklist-${platform}`;
-        const savedState = JSON.parse(localStorage.getItem(storageKey)) || {};
+        let savedState = {};
+        try { savedState = JSON.parse(localStorage.getItem(storageKey)) || {}; } catch (e) { savedState = {}; }
         const progressFill = document.querySelector('.progress-fill');
         const progressText = document.querySelector('.progress-text');
         const items = checklistContainer.querySelectorAll('.checklist-item');
+
+        const finishButton = document.getElementById('finishChecklist');
+
+        const updateFinishButton = () => {
+            if (!finishButton) return;
+            const checked = checklistContainer.querySelectorAll('input:checked').length;
+            const allDone = checked === items.length;
+            finishButton.disabled = !allDone;
+            finishButton.classList.toggle('btn-success', allDone);
+            finishButton.classList.toggle('btn-disabled', !allDone);
+        };
 
         const updateProgress = () => {
             const checked = checklistContainer.querySelectorAll('input:checked').length;
             const percent = items.length ? Math.round((checked / items.length) * 100) : 0;
             if (progressFill) progressFill.style.width = `${percent}%`;
             if (progressText) progressText.textContent = `${checked} / ${items.length} выполнено`;
+            updateFinishButton();
         };
 
         const saveState = () => {
             const state = {};
-            checklistContainer.querySelectorAll('input').forEach(i => state[i.dataset.stepId] = i.checked);
+            checklistContainer.querySelectorAll('.checklist-item').forEach(item => {
+                const stepId = item.dataset.stepId;
+                const input = item.querySelector('input');
+                if (stepId && input) state[stepId] = input.checked;
+            });
             try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch(e) {}
             updateProgress();
         };
 
+        finishButton?.addEventListener('click', () => {
+            if (finishButton.disabled) return;
+            window.location.href = 'index.html';
+        });
+
         items.forEach(item => {
             const cb = item.querySelector('input');
-            if (savedState[cb.dataset.stepId]) { cb.checked = true; item.classList.add('completed'); }
+            const stepId = item.dataset.stepId;
+            cb.checked = false;
+            if (savedState[stepId]) {
+                cb.checked = true;
+                item.classList.add('completed');
+            }
 
             const toggle = () => {
                 cb.checked = !cb.checked;
