@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureSocial — Безопасность аккаунтов</title>
+    <link rel="stylesheet" href="https://cdn.fontsource.com/css/inter/300.css">
+    <link rel="stylesheet" href="https://cdn.fontsource.com/css/inter/400.css">
+    <link rel="stylesheet" href="https://cdn.fontsource.com/css/inter/500.css">
+    <link rel="stylesheet" href="https://cdn.fontsource.com/css/inter/600.css">
+    <style>
+        :root {
+            /* Soft Cyber Green Palette */
+            --bg: #0B1114;
+            --surface: #121A1E;
+            --surface-hover: #182228;
+            --border: #1F2A30;
+            --border-hover: #2A3842;
+            --text-main: #E6EAEE;
+            --text-muted: #8A9BA5;
+            --text-subtle: #5A6A75;
+            
+            --accent: #2DD4BF; /* Soft Teal/Green */
+            --accent-glow: rgba(45, 212, 191, 0.15);
+            --accent-dim: rgba(45, 212, 191, 0.08);
+            --terminal: #4ADE80; /* Soft bright green for subtle accents */
+            
+            --vk: #0077FF;
+            --tg: #24A1DE;
+            --tt: #FF3B5C;
+            
+            --success: #2DD4BF;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: ui-monospace, 'Fira Code', 'Consolas', monospace;
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 999px;
+            
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.25);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.35);
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.75;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: var(--radius-full); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        a { text-decoration: none; color: inherit; transition: color var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        
+        .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+        .section-gap { padding: 90px 0; }
+        .mono { font-family: var(--font-mono); }
+        
+        /* === HEADER === */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(11, 17, 20, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+        }
+        .nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: 600; display: flex; align-items: center; gap: 10px; color: var(--text-main); letter-spacing: -0.01em; }
+        .logo-icon { color: var(--accent); font-weight: 700; }
+        .logo span { font-weight: 400; color: var(--text-muted); }
+        
+        .nav-actions { display: flex; gap: 12px; align-items: center; }
+        .nav-link {
+            font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
+            padding: 8px 14px; border-radius: var(--radius-md);
+            transition: all var(--transition);
+        }
+        .nav-link:hover { color: var(--text-main); background: var(--surface-hover); }
+        .nav-link.active { color: var(--accent); background: var(--accent-dim); }
+        
+        .btn-header {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 16px; border-radius: var(--radius-md);
+            background: var(--accent-dim); color: var(--accent);
+            font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(45, 212, 191, 0.2);
+            cursor: pointer; transition: all var(--transition);
+        }
+        .btn-header:hover { background: rgba(45, 212, 191, 0.15); border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 4px 12px var(--accent-glow); }
+
+        /* === HERO === */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+            background: radial-gradient(circle at 50% 20%, rgba(45, 212, 191, 0.06) 0%, transparent 55%);
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            background: linear-gradient(180deg, #F8FAFC 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero h1 span { 
+            background: linear-gradient(135deg, var(--accent) 0%, var(--terminal) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 32px;
+            background: var(--accent);
+            color: #0B1114;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 1rem;
+            border: none; cursor: pointer;
+            transition: all var(--transition);
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px var(--accent-glow); background: #3CE1C8; }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border-hover);
+            box-shadow: none;
+        }
+        .btn-outline:hover { border-color: var(--accent); background: var(--surface); color: var(--accent); box-shadow: none; }
+
+        /* === STATS === */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-top: -30px;
+            position: relative;
+            z-index: 10;
+            padding-bottom: 40px;
+        }
+        .stat-item {
+            background: var(--surface);
+            padding: 28px 24px;
+            text-align: center;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            transition: all var(--transition);
+        }
+        .stat-item:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+        .stat-number { font-family: var(--font-mono); font-size: 2.2rem; font-weight: 600; color: var(--accent); display: block; margin-bottom: 8px; letter-spacing: -0.02em; }
+        .stat-desc { font-size: 0.95rem; color: var(--text-muted); font-weight: 400; line-height: 1.5; }
+
+        /* === INFOGRAPHIC / TIMELINE === */
+        .infographic-section { padding-top: 80px; }
+        .section-title { font-size: 2.2rem; font-weight: 700; margin-bottom: 16px; text-align: center; letter-spacing: -0.01em; }
+        .section-subtitle { text-align: center; color: var(--text-muted); max-width: 640px; margin: 0 auto 64px; font-size: 1.1rem; }
+        
+        .timeline { position: relative; max-width: 920px; margin: 0 auto; }
+        .timeline::before {
+            content: ''; position: absolute; left: 36px; top: 40px; bottom: 40px; width: 2px;
+            background: linear-gradient(to bottom, var(--border-hover), transparent);
+            opacity: 0.6;
+        }
+        .timeline-item {
+            display: flex; gap: 36px; position: relative;
+            padding-bottom: 64px; opacity: 0; transform: translateY(20px);
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:last-child { padding-bottom: 0; }
+        
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        
+        .timeline-marker {
+            width: 72px; height: 72px; flex-shrink: 0;
+            border-radius: 50%; background: var(--surface);
+            border: 2px solid var(--border-hover);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; z-index: 2; position: relative;
+            transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+        .timeline-item:hover .timeline-marker { border-color: var(--accent); transform: scale(1.05); box-shadow: 0 0 0 6px var(--accent-dim); }
+        .timeline-content {
+            flex: 1; background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 32px;
+            transition: all var(--transition);
+        }
+        .timeline-content:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+        .timeline-label {
+            display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.08em; padding: 5px 12px; border-radius: var(--radius-sm);
+            margin-bottom: 14px; background: var(--accent-dim); color: var(--accent); font-family: var(--font-mono);
+        }
+        .timeline-content h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 10px; color: #F8FAFC; }
+        .timeline-content p { color: var(--text-muted); font-size: 1rem; line-height: 1.8; }
+        .timeline-tips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+        .tip-tag {
+            font-size: 0.85rem; padding: 6px 14px; background: var(--bg); border: 1px solid var(--border);
+            border-radius: var(--radius-full); color: var(--text-muted); font-weight: 500;
+        }
+
+        /* === PLATFORMS === */
+        .platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 24px; }
+        .platform-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 36px 30px;
+            display: flex; flex-direction: column;
+            transition: all var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .platform-card::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent)), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .platform-card:hover { transform: translateY(-6px); border-color: var(--card-accent, var(--border-hover)); box-shadow: var(--shadow-md); }
+        .platform-card:hover::after { opacity: 1; }
+        
+        .vk-card { --card-accent: var(--vk); }
+        .tg-card { --card-accent: var(--tg); }
+        .tt-card { --card-accent: var(--tt); }
+        
+        .platform-icon { width: 60px; height: 60px; border-radius: var(--radius-md); background: var(--bg); display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 1.6rem; border: 1px solid var(--border); transition: all var(--transition); color: var(--card-accent); }
+        .platform-card:hover .platform-icon { border-color: var(--card-accent); box-shadow: 0 0 0 4px var(--accent-dim); transform: scale(1.08); }
+        
+        .platform-card h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 12px; color: #F8FAFC; }
+        .platform-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px; flex: 1; line-height: 1.7; }
+        .platform-btn {
+            display: block; width: 100%; padding: 14px; text-align: center;
+            background: transparent; color: var(--text-main); font-weight: 600;
+            border-radius: var(--radius-md); border: 1px solid var(--border);
+            transition: all var(--transition); font-size: 0.95rem;
+        }
+        .platform-card:hover .platform-btn { background: var(--card-accent); border-color: var(--card-accent); color: #0B1114; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        /* === CHECKLIST === */
+        .checklist-wrapper { max-width: 720px; margin: 0 auto; }
+        .progress-bar { height: 8px; background: var(--border); border-radius: var(--radius-full); overflow: hidden; margin-bottom: 14px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--terminal)); width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-radius: var(--radius-full); box-shadow: 0 0 10px var(--accent-glow); }
+        .progress-text { color: var(--text-muted); margin-bottom: 28px; font-size: 0.9rem; font-weight: 500; text-align: center; }
+        
+        .checklist-container { display: flex; flex-direction: column; gap: 12px; }
+        .checklist-item {
+            display: flex; align-items: center; gap: 16px;
+            background: var(--surface); padding: 18px 24px; border-radius: var(--radius-md);
+            border: 1px solid var(--border); cursor: pointer; user-select: none;
+            transition: all var(--transition);
+        }
+        .checklist-item:hover { background: var(--surface-hover); border-color: var(--border-hover); }
+        .checklist-item.completed { background: rgba(45, 212, 191, 0.06); border-color: rgba(45, 212, 191, 0.2); }
+        .checklist-item.completed label { text-decoration: line-through; color: var(--text-muted); }
+        
+        .checklist-item input[type="checkbox"] { 
+            appearance: none; width: 22px; height: 22px; border: 2px solid var(--border-hover); 
+            border-radius: 6px; cursor: pointer; position: relative; flex-shrink: 0; 
+            transition: all 0.2s; background: var(--bg);
+        }
+        .checklist-item input[type="checkbox"]:checked { background: var(--accent); border-color: var(--accent); box-shadow: 0 2px 6px var(--accent-glow); }
+        .checklist-item input[type="checkbox"]:checked::after { content: '✓'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #0B1114; font-size: 13px; font-weight: 700; }
+        .checklist-item label { cursor: pointer; flex: 1; font-size: 1rem; font-weight: 500; color: #E6EAEE; }
+
+        /* === FOOTER === */
+        footer { border-top: 1px solid var(--border); padding: 70px 0 40px; color: var(--text-muted); font-size: 0.95rem; background: var(--surface); }
+        .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
+        .footer-brand { max-width: 320px; }
+        .footer-brand h4 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); margin-bottom: 10px; }
+        .footer-links { display: flex; gap: 28px; }
+        .footer-links a { color: var(--text-muted); transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .hero { padding: 100px 0 60px; }
+            .hero h1 { font-size: 2.2rem; }
+            .timeline::before { left: 28px; }
+            .timeline-marker { width: 56px; height: 56px; font-size: 1.4rem; }
+            .timeline-item { gap: 24px; padding-bottom: 48px; }
+            .timeline-content { padding: 24px 20px; }
+            .nav-wrapper { flex-direction: column; gap: 16px; }
+            .nav-actions { width: 100%; justify-content: center; flex-wrap: wrap; }
+            .stats { grid-template-columns: 1fr; margin-top: 0; }
+            .platforms-grid { grid-template-columns: 1fr; }
+        }
+        
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        
+        /* Lightbox */
+        .image-lightbox { position: fixed; inset: 0; z-index: 9999; opacity: 0; pointer-events: none; transition: opacity 0.3s; background: rgba(6,10,12,0.92); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; }
+        .image-lightbox:not(.hidden) { opacity: 1; pointer-events: auto; }
+        .lightbox-content { max-width: 92vw; max-height: 92vh; position: relative; }
+        .lightbox-content img { max-width: 100%; max-height: 90vh; border-radius: var(--radius-lg); box-shadow: 0 25px 60px rgba(0,0,0,0.5); border: 1px solid var(--border); }
+        .lightbox-close { position: absolute; top: 20px; right: 20px; width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+        .lightbox-close:hover { background: rgba(45, 212, 191, 0.2); border-color: var(--accent); }
+        
+        .back-to-top {
+            position: fixed; right: 24px; bottom: 24px;
+            width: 46px; height: 46px; border-radius: 50%;
+            background: var(--surface); border: 1px solid var(--border);
+            color: var(--text-muted); display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; visibility: hidden; transition: all var(--transition);
+            z-index: 90; font-size: 1.1rem;
+        }
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover { background: var(--accent); color: #0B1114; border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 4px 15px var(--accent-glow); }
+    </style>
+</head>
+<body class="view-pc">
+
+<header>
+    <div class="container nav-wrapper">
+        <a href="index.html" class="logo">
+            <span class="logo-icon">&lt;/&gt;</span>
+            SecureSocial
+        </a>
+        <nav class="nav-actions">
+            <a href="instructions.html" class="nav-link">Инструкция</a>
+            <a href="quiz.html" class="nav-link">Викторина</a>
+            <a href="password-tester.html" class="nav-link">Тестер пароля</a>
+            <button class="btn-header" onclick="window.location.href='#platforms'">Защитить аккаунт</button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Защити свой<br>цифровой след<br><span>за 15 минут</span></h1>
+            <p>Пошаговые инструкции по настройке безопасности ВКонтакте, Telegram и TikTok. Без сложной терминологии — только конкретные действия.</p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="#platforms" class="btn">Выбрать соцсеть</a>
+                <a href="#basics" class="btn btn-outline">Почему это важно?</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="container">
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">47%</span>
+                <span class="stat-desc">пользователей сталкивались со взломом хотя бы раз</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">28%</span>
+                <span class="stat-desc">используют двухфакторную аутентификацию (2FA)</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">3 мин</span>
+                <span class="stat-desc">занимает базовая настройка приватности</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Basics / Timeline -->
+    <section id="basics" class="section-gap infographic-section">
+        <div class="container">
+            <h2 class="section-title">Основы цифровой гигиены</h2>
+            <p class="section-subtitle">Прежде чем настраивать конкретные соцсети, запомните четыре золотых правила. Они работают везде — от почты до банковских приложений.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">🔑</div>
+                    <div class="timeline-content">
+                        <span class="timeline-label">Правило 1</span>
+                        <h3>Надёжные и уникальные пароли</h3>
+                        <p>Используйте разные пароли для каждого сервиса. Идеальный пароль — от 12 символов с буквами разного регистра, цифрами и символами.</p>
+                        <div class="timeline-tips">
+                            <span class="tip-tag">Минимум 12 символов</span>
+                            <span class="tip-tag">Уникальный для каждой соцсети</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">📱</div>
+                    <div class="timeline-content">
+                        <span class="timeline-label">Правило 2</span>
+                        <h3>Двухфакторная аутентификация (2FA)</h3>
+                        <p>Даже если злоумышленник узнает ваш пароль, без второго фактора он не войдёт в аккаунт. Предпочитайте приложения-аутентификаторы SMS-кодам — их сложнее перехватить.</p>
+                        <div class="timeline-tips">
+                            <span class="tip-tag">Сохраняйте резервные коды</span>
+                            <span class="tip-tag">Включайте на всех аккаунтах</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">🎣</div>
+                    <div class="timeline-content">
+                        <span class="timeline-label">Правило 3</span>
+                        <h3>Фишинговые атаки</h3>
+                        <p>Никогда не переходите по подозрительным ссылкам в сообщениях. Проверяйте адресную строку. Не вводите пароль на сторонних «проверках» и «опросах».</p>
+                        <div class="timeline-tips">
+                            <span class="tip-tag">Всегда проверяйте URL</span>
+                            <span class="tip-tag">Не кликайте по ссылкам от незнакомцев</span>
+                            <span class="tip-tag">Соцсети никогда не просят пароль в ЛС</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">💻</div>
+                    <div class="timeline-content">
+                        <span class="timeline-label">Правило 4</span>
+                        <h3>Активные сессии и устройства</h3>
+                        <p>Регулярно заходите в настройки безопасности и проверяйте список устройств, с которых выполнен вход. Завершайте все незнакомые сессии. Если видите вход из другого города — немедленно меняйте пароль и включайте 2FA.</p>
+                        <div class="timeline-tips">
+                            <span class="tip-tag">Проверяйте список устройств раз в месяц</span>
+                            <span class="tip-tag">Завершайте все незнакомые входы</span>
+                            <span class="tip-tag">Выходите из аккаунта на чужих устройствах</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platforms -->
+    <section id="platforms" class="section-gap" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+        <div class="container">
+            <h2 class="section-title">Практические инструкции</h2>
+            <p class="section-subtitle">Выберите социальную сеть, чтобы получить чек-лист по настройке</p>
+            
+            <div class="platforms-grid">
+                <div class="platform-card vk-card">
+                    <div class="platform-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.9 17.5h2.3s.7-.1 1.2-.9c.6-.9 1.6-2.6 1.6-2.6s.5-.8 1.6-.5c1.1.3 2.6 1.7 3.5 2.5s1.6.6 1.6.6h3.3s1.5-.1.8-1.2c0-.1-.4-1-2-2.9-1.6-1.9-1.5-1.6.6-4.2 1.2-1.6 1.7-2.6 1.5-2.9-.2-.4-1.4-.3-1.4-.3h-3.3s-.3-.1-.4.1c-.1.2-.7.6-.7.6s-1.5 1.9-1.8 2.4c-.3.5-.3.5-.7.1s-1.2-1.5-2-2.6c-1.1-1.6-2.2-2.1-2.8-2.1h-3s-.6.1-.8.3c-.2.2-.1.7-.1.7s3.7 8.8 8 11.5z"/></svg>
+                    </div>
+                    <h3>ВКонтакте</h3>
+                    <p>Настройка приватности профиля, управление историями входов и защита от спама.</p>
+                    <a href="vksecure.html" class="platform-btn">Открыть инструкцию</a>
+                </div>
+                
+                <div class="platform-card tg-card">
+                    <div class="platform-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z"/></svg>
+                    </div>
+                    <h3>Telegram</h3>
+                    <p>Код-пароль, скрытие номера телефона, настройка облачного пароля и активных сессий.</p>
+                    <a href="tgSecure.html" class="platform-btn">Открыть инструкцию</a>
+                </div>
+                
+                <div class="platform-card tt-card">
+                    <div class="platform-icon">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.89 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0011.2 4.33V13a8.28 8.28 0 005.24 1.85v-3.4a4.85 4.85 0 01-3.59-1.76V6.69h3.59z"/></svg>
+                    </div>
+                    <h3>TikTok</h3>
+                    <p>Приватный аккаунт, фильтрация комментариев, запрет на скачивание ваших видео.</p>
+                    <a href="ttSecure.html" class="platform-btn">Открыть инструкцию</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Checklist Example -->
+    <section class="section-gap" id="checklist-demo">
+        <div class="container text-center">
+            <h2 class="section-title">Чек-лист безопасности</h2>
+            <p class="section-subtitle">Отмечайте выполненные шаги. Прогресс сохраняется автоматически.</p>
+            
+            <div class="checklist-wrapper">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">0% выполнено</p>
+                
+                <div class="checklist-container">
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-input">
+                        <span class="check-label">Сменить пароль на сложный и уникальный</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-input">
+                        <span class="check-label">Включить двухфакторную аутентификацию</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-input">
+                        <span class="check-label">Завершить активные сессии на старых устройствах</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" class="check-input">
+                        <span class="check-label">Проверить настройки приватности профиля</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <h4>SecureSocial</h4>
+            <p>Помогает пользователям настраивать защиту аккаунтов в социальных сетях. Учебный проект по кибербезопасности.</p>
+        </div>
+        <div class="footer-links">
+            <a href="https://www.vk.com" target="_blank">VK Help</a>
+            <a href="https://telegram.org" target="_blank">Telegram FAQ</a>
+            <a href="https://www.tiktok.com" target="_blank">TikTok Safety</a>
+        </div>
+    </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Наверх">↑</button>
+
+<!-- Lightbox -->
+<div class="image-lightbox hidden" id="lightbox">
+    <div class="lightbox-content">
+        <img src="" alt="Full screen image" id="lightbox-img">
+        <button class="lightbox-close" id="lightbox-close">×</button>
+    </div>
+</div>
+
+<script>
+    // Back to top button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) backToTop.classList.add('show');
+        else backToTop.classList.remove('show');
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Checklist Logic
+    const checkboxes = document.querySelectorAll('.check-input');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    
+    function updateProgress() {
+        const total = checkboxes.length;
+        const checked = Array.from(checkboxes).filter(c => c.checked).length;
+        const percent = total === 0 ? 0 : Math.round((checked / total) * 100);
+        
+        progressFill.style.width = `${percent}%`;
+        progressText.textContent = `${percent}% выполнено`;
+        
+        checkboxes.forEach((cb, index) => {
+            localStorage.setItem(`secure_social_check_${index}`, cb.checked);
+        });
+    }
+
+    checkboxes.forEach((cb, index) => {
+        const parent = cb.closest('.checklist-item');
+        const saved = localStorage.getItem(`secure_social_check_${index}`);
+        if (saved === 'true') {
+            cb.checked = true;
+            parent.classList.add('completed');
+        }
+        
+        cb.addEventListener('change', () => {
+            if (cb.checked) parent.classList.add('completed');
+            else parent.classList.remove('completed');
+            updateProgress();
+        });
+    });
+
+    updateProgress();
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxClose = document.getElementById('lightbox-close');
+
+    const closeLightbox = () => {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+    };
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Smooth Scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Intersection Observer for subtle fade-ins
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.stat-item, .platform-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(el);
+    });
+</script>
+
+</body>
+</html>
+

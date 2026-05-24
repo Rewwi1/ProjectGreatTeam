@@ -4,7 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Чеклист ВКонтакте — SecureSocial</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <style id="theme-bootstrap">
+      html { background: #0a0b0e; color: #e4e5e9; }
+      html[data-theme="light"] { background: #f8fafc; color: #334155; }
+      html[data-theme="dark"] { background: #0a0b0e; color: #e4e5e9; }
+    </style>
+    <link id="themeStylesheet" rel="stylesheet" href="">
+    <script>
+      (function(){
+        try {
+          var theme = localStorage.getItem('site-theme');
+          if (!theme && window.matchMedia) {
+            theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          }
+          if (!theme) theme = 'dark';
+          document.documentElement.dataset.theme = theme;
+          var link = document.getElementById('themeStylesheet');
+          if (!link) {
+            link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.id = 'themeStylesheet';
+            document.head.appendChild(link);
+          }
+          link.href = theme === 'light' ? 'assets/css/styles-light.css' : 'assets/css/styles.css';
+        } catch (e) {}
+      })();
+    </script>
 </head>
 <body>
     <header>
