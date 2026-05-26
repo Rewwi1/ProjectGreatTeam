@@ -4,31 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Чеклист TikTok — SecureSocial</title>
+
+    <link id="themeStylesheetDark" rel="stylesheet" href="assets/css/styles.css">
+    <link id="themeStylesheetLight" rel="stylesheet" href="assets/css/styles-light.css" disabled>
+
     <style id="theme-bootstrap">
-      html { background: #0a0b0e; color: #e4e5e9; }
-      html[data-theme="light"] { background: #f8fafc; color: #334155; }
-      html[data-theme="dark"] { background: #0a0b0e; color: #e4e5e9; }
+        html {
+            background: #0a0b0e;
+            color: #e4e5e9;
+        }
+
+            html[data-theme="light"] {
+                background: #f8fafc;
+                color: #334155;
+            }
+
+            html[data-theme="dark"] {
+                background: #0a0b0e;
+                color: #e4e5e9;
+            }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            visibility: visible;
+        }
     </style>
-    <link id="themeStylesheet" rel="stylesheet" href="">
+
     <script>
-      (function(){
-        try {
-          var theme = localStorage.getItem('site-theme');
-          if (!theme && window.matchMedia) {
-            theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-          }
-          if (!theme) theme = 'dark';
-          document.documentElement.dataset.theme = theme;
-          var link = document.getElementById('themeStylesheet');
-          if (!link) {
-            link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.id = 'themeStylesheet';
-            document.head.appendChild(link);
-          }
-          link.href = theme === 'light' ? 'assets/css/styles-light.css' : 'assets/css/styles.css';
-        } catch (e) {}
-      })();
+        (function () {
+            try {
+                var theme = localStorage.getItem('site-theme');
+                if (!theme && window.matchMedia) {
+                    theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                }
+                if (!theme) theme = 'dark';
+                document.documentElement.dataset.theme = theme;
+
+                var darkLink = document.getElementById('themeStylesheetDark');
+                var lightLink = document.getElementById('themeStylesheetLight');
+                if (theme === 'light') {
+                    if (darkLink) darkLink.disabled = true;
+                    if (lightLink) lightLink.disabled = false;
+                } else {
+                    if (darkLink) darkLink.disabled = false;
+                    if (lightLink) lightLink.disabled = true;
+                }
+            } catch (e) { }
+        })();
     </script>
 </head>
 <body>
@@ -55,14 +79,33 @@
             <div class="container">
                 <h2 class="section-title">TT-чеклист</h2>
                 <p class="section-subtitle">Отмечайте пункты по мере выполнения.</p>
-                <div class="checklist-progress"><div class="progress-bar"><div class="progress-fill"></div></div><span class="progress-text">0 / 4 выполнено</span></div>
-                <div class="checklist-container" data-platform="tt">
-                    <div class="checklist-item" data-step-id="tt-1"><input type="checkbox" id="tt-1"><label for="tt-1">Установите надёжный пароль</label></div>
-                    <div class="checklist-item" data-step-id="tt-2"><input type="checkbox" id="tt-2"><label for="tt-2">Включите двухфакторную аутентификацию (2FA)</label></div>
-                    <div class="checklist-item" data-step-id="tt-3"><input type="checkbox" id="tt-3"><label for="tt-3">Настройте приватность аккаунта</label></div>
-                    <div class="checklist-item" data-step-id="tt-4"><input type="checkbox" id="tt-4"><label for="tt-4">Проверьте активные сеансы</label></div>
+                <div class="checklist-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span class="progress-text">0 / 4 выполнено</span>
                 </div>
-                <div class="page-action"><button id="finishChecklist" class="btn-header btn-complete" disabled>Завершить</button></div>
+                <div class="checklist-container" data-platform="tt">
+                    <div class="checklist-item" data-step-id="tt-1">
+                        <input type="checkbox" id="tt-1">
+                        <label for="tt-1">Установите надёжный пароль</label>
+                    </div>
+                    <div class="checklist-item" data-step-id="tt-2">
+                        <input type="checkbox" id="tt-2">
+                        <label for="tt-2">Включите двухфакторную аутентификацию (2FA)</label>
+                    </div>
+                    <div class="checklist-item" data-step-id="tt-3">
+                        <input type="checkbox" id="tt-3">
+                        <label for="tt-3">Настройте приватность аккаунта</label>
+                    </div>
+                    <div class="checklist-item" data-step-id="tt-4">
+                        <input type="checkbox" id="tt-4">
+                        <label for="tt-4">Проверьте активные сеансы</label>
+                    </div>
+                </div>
+                <div class="page-action">
+                    <button id="finishChecklist" class="btn-header btn-complete" disabled>Завершить</button>
+                </div>
             </div>
         </section>
     </main>

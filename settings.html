@@ -1,79 +1,102 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Настройки | SecureSocial</title>
-  <style id="theme-bootstrap">
-    html { background: #0a0b0e; color: #e4e5e9; }
-    html[data-theme="light"] { background: #f8fafc; color: #334155; }
-    html[data-theme="dark"] { background: #0a0b0e; color: #e4e5e9; }
-  </style>
-  <link id="themeStylesheet" rel="stylesheet" href="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройки | SecureSocial</title>
+
+    <link id="themeStylesheetDark" rel="stylesheet" href="assets/css/styles.css">
+    <link id="themeStylesheetLight" rel="stylesheet" href="assets/css/styles-light.css" disabled>
+
+    <style id="theme-bootstrap">
+        html {
+            background: #0a0b0e;
+            color: #e4e5e9;
+        }
+
+            html[data-theme="light"] {
+                background: #f8fafc;
+                color: #334155;
+            }
+
+            html[data-theme="dark"] {
+                background: #0a0b0e;
+                color: #e4e5e9;
+            }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            visibility: visible;
+        }
+    </style>
+
     <script>
-      (function(){
-        try {
-          var theme = localStorage.getItem('site-theme');
-          if (!theme && window.matchMedia) {
-            theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-          }
-          if (!theme) theme = 'dark';
-          document.documentElement.dataset.theme = theme;
-          var link = document.getElementById('themeStylesheet');
-          if (!link) {
-            link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.id = 'themeStylesheet';
-            document.head.appendChild(link);
-          }
-          link.href = theme === 'light' ? 'assets/css/styles-light.css' : 'assets/css/styles.css';
-        } catch (e) {}
-      })();
+        (function () {
+            try {
+                var theme = localStorage.getItem('site-theme');
+                if (!theme && window.matchMedia) {
+                    theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                }
+                if (!theme) theme = 'dark';
+                document.documentElement.dataset.theme = theme;
+
+                var darkLink = document.getElementById('themeStylesheetDark');
+                var lightLink = document.getElementById('themeStylesheetLight');
+                if (theme === 'light') {
+                    if (darkLink) darkLink.disabled = true;
+                    if (lightLink) lightLink.disabled = false;
+                } else {
+                    if (darkLink) darkLink.disabled = false;
+                    if (lightLink) lightLink.disabled = true;
+                }
+            } catch (e) { }
+        })();
     </script>
 </head>
 <body>
-  <header>
-    <div class="container nav-wrapper">
-      <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
-      <nav class="nav-actions">
-        <a href="index.html" class="back-btn">← На главную</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="settings-page">
-    <div class="container settings-container">
-      <div class="settings-header">
-        <h1>Настройки</h1>
-        <p>Управление внешним видом и параметрами интерфейса</p>
-      </div>
-
-      <div class="settings-card">
-        <div class="settings-section">
-          <h2 class="section-title">Внешний вид</h2>
-          
-          <div class="theme-control">
-            <div class="theme-info">
-              <span class="theme-name">Тема оформления</span>
-              <span class="theme-desc">Выберите светлую или тёмную тему</span>
-            </div>
-            
-            <div class="theme-buttons" role="group" aria-label="Выбор темы">
-              <button type="button" class="theme-option" data-theme="dark">Тёмная</button>
-              <button type="button" class="theme-option" data-theme="light">Светлая</button>
-            </div>
-          </div>
-          <!-- Подпись для бэкенд-интеграции: input:checked будет означать светлую тему -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">🛡️ <span>SecureSocial</span></a>
+            <nav class="nav-actions">
+                <a href="index.html" class="back-btn">← На главную</a>
+            </nav>
         </div>
-      </div>
-    </div>
-  </main>
+    </header>
 
-  <footer>
-    <div class="container footer-grid">
-      <p>2026 SecureSocial. Учебный проект.</p>
-    </div>
-  </footer>
-  <script src="assets/js/common.js"></script>
+    <main class="settings-page">
+        <div class="container settings-container">
+            <div class="settings-header">
+                <h1>Настройки</h1>
+                <p>Управление внешним видом и параметрами интерфейса</p>
+            </div>
+
+            <div class="settings-card">
+                <div class="settings-section">
+                    <h2 class="section-title">Внешний вид</h2>
+
+                    <div class="theme-control">
+                        <div class="theme-info">
+                            <span class="theme-name">Тема оформления</span>
+                            <span class="theme-desc">Выберите светлую или тёмную тему</span>
+                        </div>
+
+                        <div class="theme-buttons" role="group" aria-label="Выбор темы">
+                            <button type="button" class="theme-option" data-theme="dark">Тёмная</button>
+                            <button type="button" class="theme-option" data-theme="light">Светлая</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <p>2026 SecureSocial. Учебный проект.</p>
+        </div>
+    </footer>
+    <script src="assets/js/common.js"></script>
 </body>
 </html>

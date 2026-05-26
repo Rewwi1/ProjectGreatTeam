@@ -4,31 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Защита TikTok — Пошаговая инструкция</title>
+
+    <link id="themeStylesheetDark" rel="stylesheet" href="assets/css/styles.css">
+    <link id="themeStylesheetLight" rel="stylesheet" href="assets/css/styles-light.css" disabled>
+
     <style id="theme-bootstrap">
-      html { background: #0a0b0e; color: #e4e5e9; }
-      html[data-theme="light"] { background: #f8fafc; color: #334155; }
-      html[data-theme="dark"] { background: #0a0b0e; color: #e4e5e9; }
+        html {
+            background: #0a0b0e;
+            color: #e4e5e9;
+        }
+
+            html[data-theme="light"] {
+                background: #f8fafc;
+                color: #334155;
+            }
+
+            html[data-theme="dark"] {
+                background: #0a0b0e;
+                color: #e4e5e9;
+            }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            visibility: visible;
+        }
     </style>
-    <link id="themeStylesheet" rel="stylesheet" href="">
+
     <script>
-      (function(){
-        try {
-          var theme = localStorage.getItem('site-theme');
-          if (!theme && window.matchMedia) {
-            theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-          }
-          if (!theme) theme = 'dark';
-          document.documentElement.dataset.theme = theme;
-          var link = document.getElementById('themeStylesheet');
-          if (!link) {
-            link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.id = 'themeStylesheet';
-            document.head.appendChild(link);
-          }
-          link.href = theme === 'light' ? 'assets/css/styles-light.css' : 'assets/css/styles.css';
-        } catch (e) {}
-      })();
+        (function () {
+            try {
+                var theme = localStorage.getItem('site-theme');
+                if (!theme && window.matchMedia) {
+                    theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                }
+                if (!theme) theme = 'dark';
+                document.documentElement.dataset.theme = theme;
+
+                var darkLink = document.getElementById('themeStylesheetDark');
+                var lightLink = document.getElementById('themeStylesheetLight');
+                if (theme === 'light') {
+                    if (darkLink) darkLink.disabled = true;
+                    if (lightLink) lightLink.disabled = false;
+                } else {
+                    if (darkLink) darkLink.disabled = false;
+                    if (lightLink) lightLink.disabled = true;
+                }
+            } catch (e) { }
+        })();
     </script>
 </head>
 <body class="tt-page">
@@ -53,13 +77,108 @@
         </section>
 
         <section class="container steps-section">
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">1</div><div class="step-header-text"><span class="tagline">Шаг 1 из 4</span><h2>Установите надёжный ключ входа</h2></div></div><div class="step-instruction"><p>Создайте сложный пароль с буквами, цифрами и символами.</p><div class="tip-box"><h4>Совет</h4><p>Познакомиться с правилами сильного пароля можно во вкладке <a href="password-tester.html">Тестер пароля</a>.</p></div><div class="path-box"><span class="arrow">→</span> Профиль → настройки и конфиденциальность → Аккаунт → Ключ входа</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tt/step1/1.PNG" alt="TikTok шаг 1 — телефон"></div></div></div></div>
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">2</div><div class="step-header-text"><span class="tagline">Шаг 2 из 4</span><h2>Включите двухфакторную аутентификацию (2FA)</h2></div></div><div class="step-instruction"><p>Добавляет дополнительный уровень защиты. Без кода из SMS никто не войдёт.</p><div class="path-box"><span class="arrow">→</span> Настройки → Двухфакторная аутентификация</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tt/step2/2.PNG" alt="TikTok шаг 2 — телефон"></div></div></div></div>
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">3</div><div class="step-header-text"><span class="tagline">Шаг 3 из 4</span><h2>Настройте приватность аккаунта</h2></div></div><div class="step-instruction"><p>Сделайте аккаунт закрытым, если хотите контролировать, кто видит ваши видео.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Закрытый аккаунт</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tt/step3/3.1.PNG" alt="TikTok шаг 3 — телефон 1"></div><div class="screenshot phone"><img src="assets/images/tt/step3/3.2.PNG" alt="TikTok шаг 3 — телефон 2"></div><div class="screenshot phone"><img src="assets/images/tt/step3/3.3.PNG" alt="TikTok шаг 3 — телефон 3"></div></div></div></div>
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tt-color); color: white;">4</div><div class="step-header-text"><span class="tagline">Шаг 4 из 4</span><h2>Проверьте активные сеансы</h2></div></div><div class="step-instruction"><p>Убедитесь, что в списке только ваши устройства.</p><div class="path-box"><span class="arrow">→</span> Настройки → Безопасность → Управление устройствами</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tt/step6/6.PNG" alt="TikTok шаг 4 — телефон"></div></div></div></div>
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tt-color); color: white;">1</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 1 из 4</span>
+                        <h2>Установите надёжный ключ входа</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Создайте сложный пароль с буквами, цифрами и символами.</p>
+                    <div class="tip-box">
+                        <h4>Совет</h4>
+                        <p>Познакомиться с правилами сильного пароля можно во вкладке <a href="password-tester.html">Тестер пароля</a>.</p>
+                    </div>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Профиль → настройки и конфиденциальность → Аккаунт → Ключ входа
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tt/step1/1.PNG" alt="TikTok шаг 1 — телефон">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tt-color); color: white;">2</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 2 из 4</span>
+                        <h2>Включите двухфакторную аутентификацию (2FA)</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Добавляет дополнительный уровень защиты. Без кода из SMS никто не войдёт.</p>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Двухфакторная аутентификация
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tt/step2/2.PNG" alt="TikTok шаг 2 — телефон">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tt-color); color: white;">3</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 3 из 4</span>
+                        <h2>Настройте приватность аккаунта</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Сделайте аккаунт закрытым, если хотите контролировать, кто видит ваши видео.</p>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Конфиденциальность → Закрытый аккаунт
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tt/step3/3.1.PNG" alt="TikTok шаг 3 — телефон 1">
+                        </div>
+                        <div class="screenshot phone">
+                            <img src="assets/images/tt/step3/3.2.PNG" alt="TikTok шаг 3 — телефон 2">
+                        </div>
+                        <div class="screenshot phone">
+                            <img src="assets/images/tt/step3/3.3.PNG" alt="TikTok шаг 3 — телефон 3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tt-color); color: white;">4</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 4 из 4</span>
+                        <h2>Проверьте активные сеансы</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Убедитесь, что в списке только ваши устройства.</p>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Безопасность → Управление устройствами
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tt/step6/6.PNG" alt="TikTok шаг 4 — телефон">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="page-action"><div class="container"><a href="tt-checklist.html" class="btn-header">Далее</a></div></section>
+
+        <section class="page-action">
+            <div class="container">
+                <a href="tt-checklist.html" class="btn-header">Далее</a>
+            </div>
+        </section>
     </main>
+
     <footer>
         <div class="container footer-grid">
             <div>

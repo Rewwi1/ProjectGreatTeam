@@ -4,36 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SecureSocial — Безопасность аккаунтов</title>
+
+    <link id="themeStylesheetDark" rel="stylesheet" href="assets/css/styles.css">
+    <link id="themeStylesheetLight" rel="stylesheet" href="assets/css/styles-light.css" disabled>
+
     <style id="theme-bootstrap">
-      html { background: #0a0b0e; color: #e4e5e9; }
-      html[data-theme="light"] { background: #f8fafc; color: #334155; }
-      html[data-theme="dark"] { background: #0a0b0e; color: #e4e5e9; }
+        html {
+            background: #0a0b0e;
+            color: #e4e5e9;
+        }
+
+            html[data-theme="light"] {
+                background: #f8fafc;
+                color: #334155;
+            }
+
+            html[data-theme="dark"] {
+                background: #0a0b0e;
+                color: #e4e5e9;
+            }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            visibility: visible;
+        }
     </style>
-    <link id="themeStylesheet" rel="stylesheet" href="">
+
     <script>
-      (function(){
-        try {
-          var theme = localStorage.getItem('site-theme');
-          if (!theme && window.matchMedia) {
-            theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-          }
-          if (!theme) theme = 'dark';
-          document.documentElement.dataset.theme = theme;
-          var link = document.getElementById('themeStylesheet');
-          if (!link) {
-            link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.id = 'themeStylesheet';
-            document.head.appendChild(link);
-          }
-          link.href = theme === 'light' ? 'assets/css/styles-light.css' : 'assets/css/styles.css';
-        } catch (e) {}
-      })();
+        (function () {
+            try {
+                var theme = localStorage.getItem('site-theme');
+                if (!theme && window.matchMedia) {
+                    theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                }
+                if (!theme) theme = 'dark';
+                document.documentElement.dataset.theme = theme;
+
+                var darkLink = document.getElementById('themeStylesheetDark');
+                var lightLink = document.getElementById('themeStylesheetLight');
+                if (theme === 'light') {
+                    if (darkLink) darkLink.disabled = true;
+                    if (lightLink) lightLink.disabled = false;
+                } else {
+                    if (darkLink) darkLink.disabled = false;
+                    if (lightLink) lightLink.disabled = true;
+                }
+            } catch (e) { }
+        })();
     </script>
 </head>
 <body>
 
-    <!-- Шапка -->
     <header>
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">
@@ -43,18 +66,16 @@
                 <a href="instructions.html" class="btn-header">Инструкция</a>
                 <a href="quiz.html" class="btn-header">Викторина</a>
                 <a href="password-tester.html" class="btn-header">Тестер пароля</a>
-                <!-- ... остальные кнопки ... -->
                 <a href="settings.html" class="settings-btn" title="Настройки">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Главный экран -->
     <section class="hero">
         <div class="container">
             <h1>Защити свой цифровой след<br><span>за 15 минут</span></h1>
@@ -63,7 +84,6 @@
         </div>
     </section>
 
-    <!-- Статистика -->
     <section class="container">
         <h2 class="section-title">Почему это важно?</h2>
         <div class="stats">
@@ -82,14 +102,12 @@
         </div>
     </section>
 
-    <!-- Инфографика -->
     <section id="theory" class="infographic-section">
         <div class="container">
             <h2 class="section-title">Основы цифровой гигиены</h2>
             <p class="section-subtitle">Прежде чем настраивать конкретные соцсети, запомните четыре золотых правила. Они работают везде — от почты до банковских приложений.</p>
 
             <div class="steps-timeline">
-
                 <div class="step-item" data-color="green">
                     <div class="step-marker">
                         <span class="step-icon">🔑</span>
@@ -151,19 +169,16 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Выбор платформы -->
     <section id="platforms" class="platforms-section">
         <div class="container">
             <h2 class="section-title">Практические инструкции</h2>
             <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px;">Выберите социальную сеть, чтобы получить чек-лист по настройке</p>
 
             <div class="platforms-grid">
-
                 <div class="platform-card vk-card">
                     <div>
                         <div class="platform-icon-wrapper">
@@ -205,14 +220,10 @@
                     </div>
                     <a href="ttSecure.html" class="platform-btn">Открыть инструкцию</a>
                 </div>
-
             </div>
         </div>
     </section>
 
-    
-
-    <!-- Подвал -->
     <footer>
         <div class="container footer-grid">
             <div>

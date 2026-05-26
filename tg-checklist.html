@@ -3,33 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Чеклист Telegram — SecureSocial</title>
-        <style id="theme-bootstrap">
-            html { background: #0a0b0e; color: #e4e5e9; }
-            html[data-theme="light"] { background: #f8fafc; color: #334155; }
-            html[data-theme="dark"] { background: #0a0b0e; color: #e4e5e9; }
-        </style>
-        <link id="themeStylesheet" rel="stylesheet" href="">
-        <script>
-            (function(){
-                try {
-                    var theme = localStorage.getItem('site-theme');
-                    if (!theme && window.matchMedia) {
-                        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-                    }
-                    if (!theme) theme = 'dark';
-                    document.documentElement.dataset.theme = theme;
-                    var link = document.getElementById('themeStylesheet');
-                    if (!link) {
-                        link = document.createElement('link');
-                        link.rel = 'stylesheet';
-                        link.id = 'themeStylesheet';
-                        document.head.appendChild(link);
-                    }
-                    link.href = theme === 'light' ? 'assets/css/styles-light.css' : 'assets/css/styles.css';
-                } catch(e) {}
-            })();
-        </script>
+    <title>Чеклист Telegram — SecureSocial</title>
+
+    <link id="themeStylesheetDark" rel="stylesheet" href="assets/css/styles.css">
+    <link id="themeStylesheetLight" rel="stylesheet" href="assets/css/styles-light.css" disabled>
+
+    <style id="theme-bootstrap">
+        html {
+            background: #0a0b0e;
+            color: #e4e5e9;
+        }
+
+            html[data-theme="light"] {
+                background: #f8fafc;
+                color: #334155;
+            }
+
+            html[data-theme="dark"] {
+                background: #0a0b0e;
+                color: #e4e5e9;
+            }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            visibility: visible;
+        }
+    </style>
+
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('site-theme');
+                if (!theme && window.matchMedia) {
+                    theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                }
+                if (!theme) theme = 'dark';
+                document.documentElement.dataset.theme = theme;
+
+                var darkLink = document.getElementById('themeStylesheetDark');
+                var lightLink = document.getElementById('themeStylesheetLight');
+                if (theme === 'light') {
+                    if (darkLink) darkLink.disabled = true;
+                    if (lightLink) lightLink.disabled = false;
+                } else {
+                    if (darkLink) darkLink.disabled = false;
+                    if (lightLink) lightLink.disabled = true;
+                }
+            } catch (e) { }
+        })();
+    </script>
 </head>
 <body>
     <header>
@@ -55,17 +79,45 @@
             <div class="container">
                 <h2 class="section-title">TG-чеклист</h2>
                 <p class="section-subtitle">Отмечайте пункты по мере выполнения.</p>
-                <div class="checklist-progress"><div class="progress-bar"><div class="progress-fill"></div></div><span class="progress-text">0 / 7 выполнено</span></div>
-                <div class="checklist-container" data-platform="tg">
-                    <div class="checklist-item" data-step-id="tg-1"><input type="checkbox" id="tg-1"><label for="tg-1">Установите код-пароль</label></div>
-                    <div class="checklist-item" data-step-id="tg-2"><input type="checkbox" id="tg-2"><label for="tg-2">Включите облачный пароль (2FA)</label></div>
-                    <div class="checklist-item" data-step-id="tg-3"><input type="checkbox" id="tg-3"><label for="tg-3">Проверьте активные сеансы</label></div>
-                    <div class="checklist-item" data-step-id="tg-4"><input type="checkbox" id="tg-4"><label for="tg-4">Скройте номер телефона</label></div>
-                    <div class="checklist-item" data-step-id="tg-5"><input type="checkbox" id="tg-5"><label for="tg-5">Ограничьте фото профиля</label></div>
-                    <div class="checklist-item" data-step-id="tg-6"><input type="checkbox" id="tg-6"><label for="tg-6">Запретите пересылку</label></div>
-                    <div class="checklist-item" data-step-id="tg-7"><input type="checkbox" id="tg-7"><label for="tg-7">Настройте автоблокировку</label></div>
+                <div class="checklist-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span class="progress-text">0 / 7 выполнено</span>
                 </div>
-                <div class="page-action"><button id="finishChecklist" class="btn-header btn-complete" disabled>Завершить</button></div>
+                <div class="checklist-container" data-platform="tg">
+                    <div class="checklist-item" data-step-id="tg-1">
+                        <input type="checkbox" id="tg-1">
+                        <label for="tg-1">Установите код-пароль</label>
+                    </div>
+                    <div class="checklist-item" data-step-id="tg-2">
+                        <input type="checkbox" id="tg-2">
+                        <label for="tg-2">Включите облачный пароль (2FA)</label>
+                    </div>
+                    <div class="checklist-item" data-step-id="tg-3">
+                        <input type="checkbox" id="tg-3">
+                        <label for="tg-3">Проверьте активные сеансы</label>
+                    </div>
+                    <div class="checklist-item" data-step-id="tg-4">
+                        <input type="checkbox" id="tg-4">
+                        <label for="tg-4">Скройте номер телефона</label>
+                    </div>
+                    <div class="checklist-item" data-step-id="tg-5">
+                        <input type="checkbox" id="tg-5">
+                        <label for="tg-5">Ограничьте фото профиля</label>
+                    </div>
+                    <div class="checklist-item" data-step-id="tg-6">
+                        <input type="checkbox" id="tg-6">
+                        <label for="tg-6">Запретите пересылку</label>
+                    </div>
+                    <div class="checklist-item" data-step-id="tg-7">
+                        <input type="checkbox" id="tg-7">
+                        <label for="tg-7">Настройте автоблокировку</label>
+                    </div>
+                </div>
+                <div class="page-action">
+                    <button id="finishChecklist" class="btn-header btn-complete" disabled>Завершить</button>
+                </div>
             </div>
         </section>
     </main>

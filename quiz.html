@@ -3,33 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Викторина — SecureSocial</title>
-        <style id="theme-bootstrap">
-            html { background: #0a0b0e; color: #e4e5e9; }
-            html[data-theme="light"] { background: #f8fafc; color: #334155; }
-            html[data-theme="dark"] { background: #0a0b0e; color: #e4e5e9; }
-        </style>
-        <link id="themeStylesheet" rel="stylesheet" href="">
-        <script>
-            (function(){
-                try {
-                    var theme = localStorage.getItem('site-theme');
-                    if (!theme && window.matchMedia) {
-                        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-                    }
-                    if (!theme) theme = 'dark';
-                    document.documentElement.dataset.theme = theme;
-                    var link = document.getElementById('themeStylesheet');
-                    if (!link) {
-                        link = document.createElement('link');
-                        link.rel = 'stylesheet';
-                        link.id = 'themeStylesheet';
-                        document.head.appendChild(link);
-                    }
-                    link.href = theme === 'light' ? 'assets/css/styles-light.css' : 'assets/css/styles.css';
-                } catch(e) {}
-            })();
-        </script>
+    <title>Викторина — SecureSocial</title>
+
+    <link id="themeStylesheetDark" rel="stylesheet" href="assets/css/styles.css">
+    <link id="themeStylesheetLight" rel="stylesheet" href="assets/css/styles-light.css" disabled>
+
+    <style id="theme-bootstrap">
+        html {
+            background: #0a0b0e;
+            color: #e4e5e9;
+        }
+
+            html[data-theme="light"] {
+                background: #f8fafc;
+                color: #334155;
+            }
+
+            html[data-theme="dark"] {
+                background: #0a0b0e;
+                color: #e4e5e9;
+            }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            visibility: visible;
+        }
+    </style>
+
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('site-theme');
+                if (!theme && window.matchMedia) {
+                    theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                }
+                if (!theme) theme = 'dark';
+                document.documentElement.dataset.theme = theme;
+
+                var darkLink = document.getElementById('themeStylesheetDark');
+                var lightLink = document.getElementById('themeStylesheetLight');
+                if (theme === 'light') {
+                    if (darkLink) darkLink.disabled = true;
+                    if (lightLink) lightLink.disabled = false;
+                } else {
+                    if (darkLink) darkLink.disabled = false;
+                    if (lightLink) lightLink.disabled = true;
+                }
+            } catch (e) { }
+        })();
+    </script>
 </head>
 <body>
     <header>

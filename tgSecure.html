@@ -3,33 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Защита Telegram — Пошаговая инструкция</title>
-        <style id="theme-bootstrap">
-          html { background: #0a0b0e; color: #e4e5e9; }
-          html[data-theme="light"] { background: #f8fafc; color: #334155; }
-          html[data-theme="dark"] { background: #0a0b0e; color: #e4e5e9; }
-        </style>
-        <link id="themeStylesheet" rel="stylesheet" href="">
-        <script>
-            (function(){
-                try {
-                    var theme = localStorage.getItem('site-theme');
-                    if (!theme && window.matchMedia) {
-                        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-                    }
-                    if (!theme) theme = 'dark';
-                    document.documentElement.dataset.theme = theme;
-                    var link = document.getElementById('themeStylesheet');
-                    if (!link) {
-                        link = document.createElement('link');
-                        link.rel = 'stylesheet';
-                        link.id = 'themeStylesheet';
-                        document.head.appendChild(link);
-                    }
-                    link.href = theme === 'light' ? 'assets/css/styles-light.css' : 'assets/css/styles.css';
-                } catch (e) {}
-            })();
-        </script>
+    <title>Защита Telegram — Пошаговая инструкция</title>
+
+    <link id="themeStylesheetDark" rel="stylesheet" href="assets/css/styles.css">
+    <link id="themeStylesheetLight" rel="stylesheet" href="assets/css/styles-light.css" disabled>
+
+    <style id="theme-bootstrap">
+        html {
+            background: #0a0b0e;
+            color: #e4e5e9;
+        }
+
+            html[data-theme="light"] {
+                background: #f8fafc;
+                color: #334155;
+            }
+
+            html[data-theme="dark"] {
+                background: #0a0b0e;
+                color: #e4e5e9;
+            }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            visibility: visible;
+        }
+    </style>
+
+    <script>
+        (function () {
+            try {
+                var theme = localStorage.getItem('site-theme');
+                if (!theme && window.matchMedia) {
+                    theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                }
+                if (!theme) theme = 'dark';
+                document.documentElement.dataset.theme = theme;
+
+                var darkLink = document.getElementById('themeStylesheetDark');
+                var lightLink = document.getElementById('themeStylesheetLight');
+                if (theme === 'light') {
+                    if (darkLink) darkLink.disabled = true;
+                    if (lightLink) lightLink.disabled = false;
+                } else {
+                    if (darkLink) darkLink.disabled = false;
+                    if (lightLink) lightLink.disabled = true;
+                }
+            } catch (e) { }
+        })();
+    </script>
 </head>
 <body>
     <header>
@@ -50,23 +74,202 @@
                 <h1>Защитите аккаунт за 7 шагов</h1>
                 <p>Следуйте инструкции. На каждом шаге — текст и скриншоты.</p>
                 <div class="view-switcher">
-                    <label class="switch-label"><input type="radio" name="view-mode" value="phone" checked><span>📱 Телефон</span></label>
-                    <label class="switch-label"><input type="radio" name="view-mode" value="pc"><span>💻 ПК</span></label>
+                    <label class="switch-label">
+                        <input type="radio" name="view-mode" value="phone" checked>
+                        <span>Телефон</span>
+                    </label>
+                    <label class="switch-label">
+                        <input type="radio" name="view-mode" value="pc">
+                        <span> ПК</span>
+                    </label>
                 </div>
             </div>
         </section>
 
         <section class="container steps-section">
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">1</div><div class="step-header-text"><span class="tagline">Шаг 1 из 7</span><h2>Установите код-пароль</h2></div></div><div class="step-instruction"><p>Заблокируйте доступ к приложению PIN-кодом или отпечатком пальца.</p><div class="tip-box"><h4>Совет</h4><p>Если нужно подобрать надёжный пароль, воспользуйтесь вкладкой <a href="password-tester.html">Тестер пароля</a>.</p></div><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Код-пароль</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tg/step1/phone1.PNG" alt="Telegram шаг 1 — телефон"></div><div class="screenshot pc"><img src="assets/images/tg/step1/pc1.PNG" alt="Telegram шаг 1 — ПК"></div></div></div></div>
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">2</div><div class="step-header-text"><span class="tagline">Шаг 2 из 7</span><h2>Включите облачный пароль (2FA)</h2></div></div><div class="step-instruction"><p>Дополнительная защита при входе с нового устройства.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Облачный пароль</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tg/step2/phone2.PNG" alt="Telegram шаг 2 — телефон"></div><div class="screenshot pc"><img src="assets/images/tg/step2/pc2.PNG" alt="Telegram шаг 2 — ПК 1"></div><div class="screenshot pc"><img src="assets/images/tg/step2/pc2.2.PNG" alt="Telegram шаг 2 — ПК 2"></div></div></div></div>
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">3</div><div class="step-header-text"><span class="tagline">Шаг 3 из 7</span><h2>Проверьте активные сеансы</h2></div></div><div class="step-instruction"><p>Убедитесь, что в список вошли только ваши устройства.</p><div class="path-box"><span class="arrow">→</span> Настройки → Устройства → Завершить все другие сеансы</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tg/step3/phone3.PNG" alt="Telegram шаг 3 — телефон"></div><div class="screenshot pc"><img src="assets/images/tg/step3/pc3.PNG" alt="Telegram шаг 3 — ПК"></div></div></div></div>
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">4</div><div class="step-header-text"><span class="tagline">Шаг 4 из 7</span><h2>Скройте номер телефона</h2></div></div><div class="step-instruction"><p>Сделайте номер невидимым для всех, кроме ваших контактов.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Номер телефона → Никто</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tg/step4/phone4.PNG" alt="Telegram шаг 4 — телефон"></div><div class="screenshot pc"><img src="assets/images/tg/step4/pc4.PNG" alt="Telegram шаг 4 — ПК"></div></div></div></div>
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">5</div><div class="step-header-text"><span class="tagline">Шаг 5 из 7</span><h2>Ограничьте фото профиля</h2></div></div><div class="step-instruction"><p>Запретите незнакомцам сохранять и пересылать ваше фото.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Фото и видео → Мои контакты</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tg/step5/phone5.PNG" alt="Telegram шаг 5 — телефон"></div><div class="screenshot pc"><img src="assets/images/tg/step5/pc5.PNG" alt="Telegram шаг 5 — ПК"></div></div></div></div>
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">6</div><div class="step-header-text"><span class="tagline">Шаг 6 из 7</span><h2>Запретите пересылку</h2></div></div><div class="step-instruction"><p>Скройте ссылку на ваш профиль при пересылке сообщений.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Пересылка сообщений → Никто</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tg/step6/phone6.PNG" alt="Telegram шаг 6 — телефон"></div><div class="screenshot pc"><img src="assets/images/tg/step6/pc6.PNG" alt="Telegram шаг 6 — ПК"></div></div></div></div>
-            <div class="step-card"><div class="step-header"><div class="step-number" style="background: var(--tg-color); color: white;">7</div><div class="step-header-text"><span class="tagline">Шаг 7 из 7</span><h2>Настройте автоблокировку</h2></div></div><div class="step-instruction"><p>Автоматически требуйте код-пароль через 1 минуту неактивности.</p><div class="path-box"><span class="arrow">→</span> Настройки → Конфиденциальность → Код-пароль → Автоблокировка</div><div class="screenshots-list"><div class="screenshot phone"><img src="assets/images/tg/step7/phone7.PNG" alt="Telegram шаг 7 — телефон"></div><div class="screenshot pc"><img src="assets/images/tg/step7/pc7.PNG" alt="Telegram шаг 7 — ПК"></div></div></div></div>
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tg-color); color: white;">1</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 1 из 7</span>
+                        <h2>Установите код-пароль</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Заблокируйте доступ к приложению PIN-кодом или отпечатком пальца.</p>
+                    <div class="tip-box">
+                        <h4>Совет</h4>
+                        <p>Если нужно подобрать надёжный пароль, воспользуйтесь вкладкой <a href="password-tester.html">Тестер пароля</a>.</p>
+                    </div>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Конфиденциальность → Код-пароль
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tg/step1/phone1.PNG" alt="Telegram шаг 1 — телефон">
+                        </div>
+                        <div class="screenshot pc">
+                            <img src="assets/images/tg/step1/pc1.PNG" alt="Telegram шаг 1 — ПК">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tg-color); color: white;">2</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 2 из 7</span>
+                        <h2>Включите облачный пароль (2FA)</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Дополнительная защита при входе с нового устройства.</p>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Конфиденциальность → Облачный пароль
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tg/step2/phone2.PNG" alt="Telegram шаг 2 — телефон">
+                        </div>
+                        <div class="screenshot pc">
+                            <img src="assets/images/tg/step2/pc2.PNG" alt="Telegram шаг 2 — ПК 1">
+                        </div>
+                        <div class="screenshot pc">
+                            <img src="assets/images/tg/step2/pc2.2.PNG" alt="Telegram шаг 2 — ПК 2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tg-color); color: white;">3</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 3 из 7</span>
+                        <h2>Проверьте активные сеансы</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Убедитесь, что в список вошли только ваши устройства.</p>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Устройства → Завершить все другие сеансы
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tg/step3/phone3.PNG" alt="Telegram шаг 3 — телефон">
+                        </div>
+                        <div class="screenshot pc">
+                            <img src="assets/images/tg/step3/pc3.PNG" alt="Telegram шаг 3 — ПК">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tg-color); color: white;">4</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 4 из 7</span>
+                        <h2>Скройте номер телефона</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Сделайте номер невидимым для всех, кроме ваших контактов.</p>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Конфиденциальность → Номер телефона → Никто
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tg/step4/phone4.PNG" alt="Telegram шаг 4 — телефон">
+                        </div>
+                        <div class="screenshot pc">
+                            <img src="assets/images/tg/step4/pc4.PNG" alt="Telegram шаг 4 — ПК">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tg-color); color: white;">5</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 5 из 7</span>
+                        <h2>Ограничьте фото профиля</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Запретите незнакомцам сохранять и пересылать ваше фото.</p>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Конфиденциальность → Фото и видео → Мои контакты
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tg/step5/phone5.PNG" alt="Telegram шаг 5 — телефон">
+                        </div>
+                        <div class="screenshot pc">
+                            <img src="assets/images/tg/step5/pc5.PNG" alt="Telegram шаг 5 — ПК">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tg-color); color: white;">6</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 6 из 7</span>
+                        <h2>Запретите пересылку</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Скройте ссылку на ваш профиль при пересылке сообщений.</p>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Конфиденциальность → Пересылка сообщений → Никто
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tg/step6/phone6.PNG" alt="Telegram шаг 6 — телефон">
+                        </div>
+                        <div class="screenshot pc">
+                            <img src="assets/images/tg/step6/pc6.PNG" alt="Telegram шаг 6 — ПК">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number" style="background: var(--tg-color); color: white;">7</div>
+                    <div class="step-header-text">
+                        <span class="tagline">Шаг 7 из 7</span>
+                        <h2>Настройте автоблокировку</h2>
+                    </div>
+                </div>
+                <div class="step-instruction">
+                    <p>Автоматически требуйте код-пароль через 1 минуту неактивности.</p>
+                    <div class="path-box">
+                        <span class="arrow">→</span> Настройки → Конфиденциальность → Код-пароль → Автоблокировка
+                    </div>
+                    <div class="screenshots-list">
+                        <div class="screenshot phone">
+                            <img src="assets/images/tg/step7/phone7.PNG" alt="Telegram шаг 7 — телефон">
+                        </div>
+                        <div class="screenshot pc">
+                            <img src="assets/images/tg/step7/pc7.PNG" alt="Telegram шаг 7 — ПК">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="page-action"><div class="container"><a href="tg-checklist.html" class="btn-header">Далее</a></div></section>
+
+        <section class="page-action">
+            <div class="container">
+                <a href="tg-checklist.html" class="btn-header">Далее</a>
+            </div>
+        </section>
     </main>
+
     <footer>
         <div class="container footer-grid">
             <div>
